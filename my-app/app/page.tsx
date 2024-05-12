@@ -1,7 +1,6 @@
-import Image from "next/image";
-import {Component} from "@/components/component/component"
+import {Principal} from "@/components/component/principal"
 export default function Home() {
   return (
-    <Component/>
+    <Principal/>
   );
 }
