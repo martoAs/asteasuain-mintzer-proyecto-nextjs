@@ -14,6 +14,7 @@ import StoreIcon from '@mui/icons-material/Store';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import {NavListDrawer} from './NavListDrawer';
 import {useState} from 'react';
+import Link from 'next/link';
 
 const navLinks = [
     {title: 'Home', path: '/', icon: <HomeIcon/>},
@@ -40,15 +41,17 @@ export function NavBar() {
                     </IconButton>
                     <Box sx={{display: {xs: "none", sm: "block"}}}>
                         {navLinks.map((item) => (
-                            <Button
-                                color="inherit"
+                            <Link
                                 key={item.title}
-                                component="a"
-                                href={item.path}
-                                startIcon={item.icon}
-                            >
-                                {item.title}
-                            </Button>
+                                href={item.path}>
+                                <Button
+                                    color="inherit"
+                                    startIcon={item.icon}
+                                >
+                                    {item.title}
+
+                                </Button>
+                            </Link>
                         ))}
                     </Box>
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
