@@ -1,10 +1,12 @@
 import { Opinions } from "./opinions"
 import { CardsTopSelling } from "./cards"
 import { Introduction } from "./intro"
+import { NavBar } from "./navbar/Navbar"
 
 export function Principal() {
   return (
     <>
+        <NavBar/>
       <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-[#3b2314] text-gray-100">
       <Introduction/>
       </section>
