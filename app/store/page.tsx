@@ -1,12 +1,9 @@
-import '../../components/ui/css/swiper/styles.css';
-import GridOfCards from '../../components/component/store/GridOfCards';
+import {Principal} from '@/components/component/store/Principal';
 
 export default function Page() {
     return (
         <>
-            <GridOfCards>
-
-            </GridOfCards>
+            <Principal />
         </>
     )
 }

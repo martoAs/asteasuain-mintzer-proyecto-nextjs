@@ -1,15 +1,14 @@
 import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
 import Image from "next/image";
-import StarIcon from "@/components/component/staricon";
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 export function StoreCards() {
-    const random = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
+    //const random = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
     const icon = <ShoppingCartIcon/>;
     return (
         <>
-            <Card className="bg-[#2d1c10] text-gray-100">
+            <Card className="bg-[#31363F] text-gray-100">
                 <CardHeader>
                     <Image
                         alt="Product"
@@ -29,7 +28,7 @@ export function StoreCards() {
                 </CardContent>
                 <CardFooter>
                     <Button
-                        className="w-full bg-[#a07d5e] text-[#3b2314] hover:bg-[#b28f70] dark:bg-[#3b2314] dark:text-gray-100 dark:hover:bg-[#2d1c10]"
+                        className="w-full bg-[#76ABAE] text-[#FFFFFF] hover:bg-[#222831] dark:bg-[#3b2314] dark:text-gray-100 dark:hover:bg-[#2d1c10]"
                         startIcon={icon}
                     >
                         Add to Cart

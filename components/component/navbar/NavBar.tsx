@@ -16,22 +16,26 @@ import {NavListDrawer} from './NavListDrawer';
 import {useState} from 'react';
 import Link from 'next/link';
 
-const navLinks = [
+const NAVLINKS = [
     {title: 'Home', path: '/', icon: <HomeIcon/>},
     {title: 'Tienda', path: '/store', icon: <StoreIcon/>},
     {title: 'Carrito', path: '/cart', icon: <ShoppingCartIcon/>},
 ];
 
+const COLOR = '#76ABAE'
+
 export function NavBar() {
     const [open, setOpen] = useState(false);
 
     return (
-        <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
-                <Toolbar>
+        <Box sx={{ flexGrow: 1}}>
+            <AppBar position="static" sx={{
+                bgcolor: COLOR,
+            }}>
+                <Toolbar >
                     <IconButton
                         size="large"
-                        color="inherit"
+
                         aria-label="menu"
                         onClick={() => setOpen(true)}
                         sx={{display: {xs: "block", sm: "none"}}}
@@ -40,7 +44,7 @@ export function NavBar() {
                         <MenuIcon/>
                     </IconButton>
                     <Box sx={{display: {xs: "none", sm: "block"}}}>
-                        {navLinks.map((item) => (
+                        {NAVLINKS.map((item) => (
                             <Link
                                 key={item.title}
                                 href={item.path}>
@@ -67,7 +71,7 @@ export function NavBar() {
                 onClose={() => setOpen(false)}
                 sx={{display: {xs: "block", sm: "none"}}}
             >
-                <NavListDrawer items={navLinks}/>
+                <NavListDrawer items={NAVLINKS}/>
             </Drawer>
         </Box>
     );
