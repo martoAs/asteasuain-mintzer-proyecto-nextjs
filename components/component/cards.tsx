@@ -7,7 +7,7 @@ export function CardsTopSelling() {
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
-        <Card className="bg-[#2d1c10] text-gray-100">
+        <Card className="bg-gray-900 text-gray-100">
           <CardHeader>
             <Image
               alt="Product"
@@ -40,7 +40,7 @@ export function CardsTopSelling() {
             </Button>
           </CardFooter>
         </Card>
-        <Card className="bg-[#2d1c10] text-gray-100">
+        <Card className="bg-gray-900 text-gray-100">
           <CardHeader>
             <Image
               alt="Product"
@@ -73,7 +73,7 @@ export function CardsTopSelling() {
             </Button>
           </CardFooter>
         </Card>
-        <Card className="bg-[#2d1c10] text-gray-100">
+        <Card className="bg-gray-900 text-gray-100">
           <CardHeader>
             <Image
               alt="Product"
@@ -106,7 +106,7 @@ export function CardsTopSelling() {
             </Button>
           </CardFooter>
         </Card>
-        <Card className="bg-[#2d1c10] text-gray-100">
+        <Card className="bg-gray-900 text-gray-100">
           <CardHeader>
             <Image
               alt="Product"

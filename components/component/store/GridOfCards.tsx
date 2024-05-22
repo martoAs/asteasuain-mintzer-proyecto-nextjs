@@ -1,4 +1,4 @@
-import 'swiper/css';
+
 import { StoreCards } from './StoreCards';
 
 export default function GridOfCards() {
