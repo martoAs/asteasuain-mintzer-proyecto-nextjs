@@ -12,7 +12,7 @@ const artists = [
     { artist: 'The+Rolling+Stones', album: 'Sticky+Fingers' },
     { artist: 'The+Who', album: 'Who%27s+Next' },
     { artist: 'The+Doors', album: 'The+Doors' },
-    { artist: 'Queen', album: 'A+Night+at+the+Opera' },
+    { artist: 'Oasis', album: '(What%27s+the+Story)+Morning+Glory%3F' },
     { artist: 'The+Velvet+Underground', album: 'The+Velvet+Underground+%26+Nico' },
     { artist: 'David+Bowie', album: 'The+Rise+and+Fall+of+Ziggy+Stardust+and+the+Spiders+from+Mars' },
     { artist: 'The+Ramones', album: 'Ramones' },
@@ -24,9 +24,7 @@ const artists = [
 ];
 
 export async function GET() {
-
     const apiKey = process.env.LASTFM_API_KEY;
-    console.log(apiKey)
     const method = 'album.getInfo';
     const fetchPromises = artists.map(({ artist, album }) => {
         const url = `${DATA_SOURCE_URL}?method=${method}&artist=${artist}&album=${album}&api_key=${apiKey}&format=json`;

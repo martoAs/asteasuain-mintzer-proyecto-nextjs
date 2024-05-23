@@ -1,29 +1,30 @@
+
 import {Card, CardContent, CardFooter, CardHeader} from "@/components/ui/card";
 import Image from "next/image";
 import Button from '@mui/material/Button';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-export function StoreCards() {
+export function StoreCards({ item }:{item: Data}) {
     //const random = Math.floor(Math.random() * (100 - 50 + 1)) + 50;
     const icon = <ShoppingCartIcon/>;
     return (
         <>
-            <Card className="bg-[#31363F] text-gray-100">
+            <Card className="bg-[#31363F] text-gray-100 ">
                 <CardHeader>
                     <Image
                         alt="Product"
                         className="aspect-square object-cover rounded-t-lg"
                         height="100"
-                        src="/placeholder.svg"
+                        src={item.imageUrl}
                         width="100"
                     />
                 </CardHeader>
-                <CardContent>
-                    <div>
-                        Nombre de Artista
+                <CardContent className="justify-center">
+                    <div className="name">
+                        {item.artist}
                     </div>
-                    <div>
-                        Nombre de Album
+                    <div className="name">
+                        {item.albumName}
                     </div>
                 </CardContent>
                 <CardFooter>
