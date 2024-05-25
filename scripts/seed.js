@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const { db } = require('@vercel/postgres');
+import { hash } from 'bcryptjs';
+import { db } from '@vercel/postgres';
 
 async function seedUsers(client) {
   try {
@@ -28,7 +28,7 @@ async function seedUsers(client) {
     // Insert data into the "users" table
     const insertedUsers = await Promise.all(
       users.map(async (user) => {
-        const hashedPassword = await bcrypt.hash(user.password, 10);
+        const hashedPassword = await hash(user.password, 10);
         return client.sql`
           INSERT INTO users (id, name, email, password)
           VALUES (uuid_generate_v4(), ${user.name}, ${user.email}, ${hashedPassword})
