@@ -9,10 +9,21 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnAdmin = nextUrl.pathname.startsWith('/admin');
       if (isOnAdmin && !isLoggedIn) {
-        return false; // Redirect unauthenticated users to login page
+        return false; 
       }
       return true;
     },
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      const urlObject = new URL(url)
+      const callbackUrl = urlObject.searchParams.get('callbackUrl')
+      if (callbackUrl) return url = callbackUrl
+      
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    }
   },
   providers: [], // Add providers with an empty array for now
 } satisfies NextAuthConfig;

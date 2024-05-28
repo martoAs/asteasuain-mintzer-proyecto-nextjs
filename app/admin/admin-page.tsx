@@ -87,8 +87,8 @@ export default function AdminPage() {
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
                 <form
-                  onSubmit={async (e) => {
-                    e.preventDefault(); // Prevent default form submission behavior
+                  action={async (e) => {
+                    'use server';
                     await signOut(); // Call the signOut function
                   }}
                 >
