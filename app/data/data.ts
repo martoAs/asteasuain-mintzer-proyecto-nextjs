@@ -3,3 +3,9 @@ interface Data {
     artist: string;
     imageUrl: string;
 }
+
+interface LastFMData {
+    artist: string;
+    album: string;
+}
+
