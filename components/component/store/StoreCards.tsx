@@ -10,6 +10,7 @@ import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
 
+
 export function StoreCards({item}: { item: Data }) {
     return (
         <Card sx={{ width: 320, maxWidth: '100%', border: 'none'}} className="bg-[#EEEEEE]">
@@ -26,8 +27,7 @@ export function StoreCards({item}: { item: Data }) {
             <CardContent>
                 <Typography level="body-xs">{item.artist}</Typography>
 
-                    <Link
-                        href="#product-card"
+                <Link href={`/album/${item.id}`}
                         fontWeight="md"
                         color="neutral"
                         textColor="text.primary"
