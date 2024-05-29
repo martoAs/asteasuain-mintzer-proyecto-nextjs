@@ -17,8 +17,9 @@ export const authConfig = {
       // Allows relative callback URLs
       const urlObject = new URL(url)
       const callbackUrl = urlObject.searchParams.get('callbackUrl')
+     
       if (callbackUrl) return url = callbackUrl
-      
+
       if (url.startsWith("/")) return `${baseUrl}${url}`
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url
