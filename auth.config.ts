@@ -9,11 +9,11 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       const isOnAdmin = nextUrl.pathname.startsWith('/admin');
       if (isOnAdmin && !isLoggedIn) {
-        return false; 
+        return false; // Redirect unauthenticated users to login page
       }
       return true;
     },
-    async redirect({ url, baseUrl }) {
+     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
       const urlObject = new URL(url)
       const callbackUrl = urlObject.searchParams.get('callbackUrl')
@@ -25,5 +25,5 @@ export const authConfig = {
       return baseUrl
     }
   },
-  providers: [], // Add providers with an empty array for now
+  providers: [], 
 } satisfies NextAuthConfig;

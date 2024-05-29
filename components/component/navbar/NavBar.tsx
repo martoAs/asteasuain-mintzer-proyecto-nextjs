@@ -61,7 +61,9 @@ export function NavBar() {
                     <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
                         {/* Puedes poner aquí un título o logo si lo deseas */}
                     </Typography>
-                    <Button color="inherit">Log in</Button>
+                    <Link href="/login">
+                        <Button color="inherit">Log in</Button>
+                    </Link>
                 </Toolbar>
             </AppBar>
 

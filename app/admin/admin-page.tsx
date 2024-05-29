@@ -92,7 +92,7 @@ export default function AdminPage() {
                     await signOut(); // Call the signOut function
                   }}
                 >
-                  <button type="submit">Logout</button> {/* Use a button instead of a link */}
+                  <button type="submit">Logout</button> 
                 </form>
               </DropdownMenuItem>
             </DropdownMenuContent>
