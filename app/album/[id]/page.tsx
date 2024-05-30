@@ -47,21 +47,24 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
 
             <div className="flex flex-row gap-20 p-10 m-10 bg-[#EEEEEE]">
                 <div className="w-1/2 relative">
-                    <Image src={data.imageUrl} alt={"CAMBIAME"} className="size-full" fill/>
+                    <div className="w-10" style={{aspectRatio: '1/1'}}>
+                        <Image src={data.imageUrl} alt={"CAMBIAME"} className="w-full h-full" fill/>
+                    </div>
                 </div>
                 <div className="flex flex-col justify-center w-1/2">
                     <Box>
-                        <Stack direction="row" justifyContent="space-between" alignItems="center">
+                        <Stack
+                            direction={{xs: 'column', lg: 'row'}}
+                            spacing={2}
+                            justifyContent="space-between"
+                        >
+                            <Typography level="h3" component="div">
+                                {data.albumName}
+                            </Typography>
 
-                            <Stack direction={{ xs: 'column', lg: 'row' }} spacing={2}>
-                                <Typography level="h3" component="div">
-                                    {data.albumName}
-                                </Typography>
-                                <Typography level="h3" component="div">
-                                    $4.50
-                                </Typography>
-                            </Stack>
-
+                            <Typography level="h3" component="div">
+                                $4.50
+                            </Typography>
                         </Stack>
                         <Typography level="body-xs">{data.artist}</Typography>
 
@@ -75,18 +78,23 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
 
                     </Box>
 
-                    <Box >
-                        <Typography gutterBottom>
+                    <Box>
+                        <Typography className="py-5">
                             Tags
                         </Typography>
-                        <Stack
-                            direction="row"
-                            spacing={1}
-                            >
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                flexWrap: 'wrap',
+                                alignItems: 'center', // Alinea los elementos verticalmente
+                                justifyContent: 'flex-start', // Alinea los elementos horizontalmente
+                            }}
+                        >
                             {data.tags.map((tag: string) => (
                                 <Chip>{tag}</Chip>
                             ))}
-                        </Stack>
+                        </Box>
                     </Box>
 
                     <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD] my-5" size="lg">
