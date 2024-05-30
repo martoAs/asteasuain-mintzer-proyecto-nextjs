@@ -13,10 +13,20 @@ export async function getArtistData(artists: LastFMData[]) {
 
     const results = await Promise.all(fetchPromises);
 
-    return results.map(item => ({
-        id: item.id, // Use the id from the original artists array
-        albumName: item.album.name,
-        artist: item.album.artist,
-        imageUrl: item.album.image.find((img: { size: string; }) => img.size === 'large')?.['#text'] || '',
-    }));
+    console.log(results[0]);
+
+    return results.map(item => {
+        const album = item.album || {}; // Default to an empty object if album is not defined
+        const wiki = album.wiki || {}; // Default to an empty object if wiki is not defined
+        const tags = album.tags || { tag: [] }; // Default to an empty object with an empty tag array if tags is not defined
+
+        return {
+            id: item.id, // Use the id from the original artists array
+            albumName: album.name || '',
+            artist: album.artist || '',
+            summary: wiki.summary || 'No summary available', // Provide a default value if summary is not available
+            imageUrl: album.image ? album.image.find((img: { size: string; }) => img.size === 'mega')?.['#text'] || '' : '',
+            tags: tags.tag.map((tag: { name: string; }) => tag.name),
+        };
+    });
 }
