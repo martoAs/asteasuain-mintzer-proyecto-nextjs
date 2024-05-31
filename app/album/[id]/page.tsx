@@ -1,8 +1,5 @@
 import {getArtists} from "@/app/data/getArtists";
 import {getArtistData} from "@/app/external/lastFm";
-import {CardMedia} from "@mui/material";
-import Card from "@mui/joy/Card";
-import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import Button from '@mui/joy/Button';
 import {Divider, Stack} from "@mui/joy";
@@ -19,7 +16,13 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
 
     const data = results[0]
 
-    function renderSummaryWithoutLink(summary : string) {
+    const chips = [];
+    for (let i = 0; i < data.tags.length; i++) {
+        const tag = data.tags[i];
+        chips.push(<Chip key={i}>{tag}</Chip>);
+    }
+
+    function renderSummaryWithoutLink(summary: string) {
         // Buscar coincidencias de enlaces en el resumen original
         const linkRegex = /<a\s+href=["']([^"']*)["'][^>]*>(.*?)<\/a>/gi;
         const match = linkRegex.exec(summary);
@@ -30,7 +33,7 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
             const summaryWithoutLink = data.summary.replace(linkRegex, '..');
             return (
                 <>
-                    <Typography className="text-justify" sx={{display: {xs: "none", sm: "block"}}}>
+                    <Typography className="text-justify" >
                         {summaryWithoutLink}
                     </Typography>
                     <Link className="text-blue-600" href={linkUrl}>{anchorText}</Link>
@@ -43,15 +46,20 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
 
     return (
         <div
-            className="py-12 md:py-24 bg-[#191D23] text-gray-100  flex flex-col justify-center min-h-screen overflow-hidden">
+            className=" lg:p-36 bg-[#191D23] text-gray-100  flex flex-col justify-center min-h-screen overflow-hidden ">
 
-            <div className="flex flex-row gap-20 p-10 m-10 bg-[#EEEEEE]">
-                <div className="w-1/2 relative">
-                    <div className="w-10" style={{aspectRatio: '1/1'}}>
-                        <Image src={data.imageUrl} alt={"CAMBIAME"} className="w-full h-full" fill/>
-                    </div>
+            <div className="flex gap-20 p-10 m-10 bg-[#EEEEEE] self-center flex-col sm:flex-row ">
+                <div className="flex w-full sm:w-1/2 justify-center items-center">
+                    <Image
+                        src={data.imageUrl}
+                        alt="My image"
+                        className="w-96"
+                        layout="responsive"
+                        width={500}
+                        height={500}
+                    />
                 </div>
-                <div className="flex flex-col justify-center w-1/2">
+                <div className="flex flex-col justify-center w-full sm:w-1/2">
                     <Box>
                         <Stack
                             direction={{xs: 'column', lg: 'row'}}
@@ -66,7 +74,7 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
                                 $4.50
                             </Typography>
                         </Stack>
-                        <Typography level="body-xs">{data.artist}</Typography>
+                        <Typography className="py-5" level="body-xs">{data.artist}</Typography>
 
                         <Divider>
                             <Chip variant="soft" color="neutral" size="sm">
@@ -87,13 +95,11 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
                                 display: 'flex',
                                 flexDirection: 'row',
                                 flexWrap: 'wrap',
-                                alignItems: 'center', // Alinea los elementos verticalmente
+                                alignItems: 'center',
                                 justifyContent: 'flex-start', // Alinea los elementos horizontalmente
                             }}
                         >
-                            {data.tags.map((tag: string) => (
-                                <Chip>{tag}</Chip>
-                            ))}
+                            {chips}
                         </Box>
                     </Box>
 
