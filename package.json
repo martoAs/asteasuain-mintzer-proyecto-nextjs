@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "seed": "node -r dotenv/config ./scripts/seed.js"
+  },
+  "prisma":{
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} ./scripts/seed.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -16,6 +19,7 @@
     "@mui/icons-material": "^5.15.18",
     "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.18",
+    "@prisma/client": "^5.14.0",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-menubar": "^1.0.4",
@@ -49,6 +53,7 @@
     "postcss": "^8",
     "prisma": "^5.14.0",
     "tailwindcss": "^3.4.3",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }
