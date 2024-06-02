@@ -37,7 +37,7 @@ export default function AdminPage() {
               </Link>
               <Link
                 className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                href="#"
+                href="/admin/add"
               >
                 <PlusIcon className="h-4 w-4" />
                 Agregar productos
@@ -102,9 +102,12 @@ export default function AdminPage() {
         <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
           <div className="flex items-center">
             <h1 className="font-semibold text-lg md:text-2xl">Productos</h1>
-            <Button className="ml-auto" size="sm">
-              Agregar producto
-            </Button>
+            <Link className="p-5" href="/admin/add">
+               <Button className="ml-auto" size="sm">
+                Agregar producto
+                </Button>
+            </Link>
+            
           </div>
           <div className="border shadow-sm rounded-lg">
             <Table>
