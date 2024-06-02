@@ -8,9 +8,6 @@ const SearchInput = () => {
     function handleSearch(term: string) {
         const params = new URLSearchParams(searchParams);
 
-
-
-        console.log(term);
         if (term) {
             params.set('query', term);
         } else {

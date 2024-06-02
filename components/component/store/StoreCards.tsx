@@ -9,6 +9,7 @@ import Link from '@mui/joy/Link';
 import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
+import Image from 'next/image';
 
 
 export function StoreCards({item}: { item: Data }) {
@@ -16,9 +17,10 @@ export function StoreCards({item}: { item: Data }) {
         <Card sx={{ width: 320, maxWidth: '100%', border: 'none'}} className="bg-[#EEEEEE]">
             <CardOverflow>
                 <AspectRatio sx={{ minWidth: 100 }}>
-                    <img
+                    <Image
                         src={item.imageUrl}
-                        srcSet= {`${item.imageUrl} 2x`}
+                        width={100}
+                        height={100}
                         loading="lazy"
                         alt=""
                     />

@@ -13,7 +13,7 @@ export async function getArtistData(artists: LastFMData[]) {
 
     const results = await Promise.all(fetchPromises);
 
-    console.log(results[0]);
+   
 
     return results.map(item => {
         const album = item.album || {}; // Default to an empty object if album is not defined

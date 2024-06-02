@@ -5,6 +5,7 @@ import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMen
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { JSX, SVGProps } from "react"
 import { signOut } from '@/auth';
+import Image from 'next/image';
 
 
 export default function AdminPage() {
@@ -70,7 +71,7 @@ export default function AdminPage() {
                 size="icon"
                 variant="ghost"
               >
-                <img
+                <Image
                   alt="Avatar"
                   className="rounded-full"
                   height="32"
@@ -80,7 +81,7 @@ export default function AdminPage() {
                     objectFit: "cover",
                   }}
                   width="32"
-                />
+                ></Image>
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
