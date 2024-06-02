@@ -4,6 +4,7 @@ import { prisma } from '../../../lib/prisma';
 export async function addProduct(title: string, price: number, status: string, artist: string, formats: string[]) {
     let product;
     let formatIds = [];
+    console.log('Formats', formats);
   
     try {
      
@@ -17,13 +18,14 @@ export async function addProduct(title: string, price: number, status: string, a
       });
   
       
-      for (const format of formats) {
+      for (let formatd of formats) {
         let formatEntry = await prisma.format.create({
           data: {
             id: product.id,
-            format,
+            format: formatd,
           }
         });
+        console.log('Format created:', formatEntry);
         formatIds.push(formatEntry.key);
       }
   
