@@ -4,13 +4,13 @@ import { Input } from "@/components/ui/input"
 import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
-import { useState } from "react"
+import { SetStateAction, useState } from "react"
 import { addProduct } from "./addProduct"
 
 export function AddProduct() {
 
   const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(0.00);
   const [status, setStatus] = useState("");
   const [artist, setArtist] = useState("");
   const [formats, setFormats] = useState<string[]>([]);
@@ -40,6 +40,11 @@ export function AddProduct() {
     }
   };
 
+  const handleStatusChange = (value: SetStateAction<string>) => { 
+    setStatus(value);
+  };
+
+
   return (
       <div className="container mx-auto max-w-4xl px-4 py-8">
       <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
@@ -47,23 +52,23 @@ export function AddProduct() {
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSaveProduct}>
           <div className="space-y-2">
             <Label htmlFor="title">Título del album</Label>
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto" />
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto" />  
           </div>
           <div className="space-y-2">
             <Label htmlFor="price">Precio</Label>
-            <Input id="price" value={price} onChange={(e)=> setPrice(Number(e.target.value))} min={1} placeholder="Ingrese el precio del producto" required type="number" />
+            <Input id="price" value={price} onChange={(e)=> setPrice(Number(e.target.value))} min={1} placeholder="Ingrese el precio del producto" required type="number" step="0.01" />
           </div>
           <div className="space-y-2">
             <Label htmlFor="status">Novedad del producto</Label>
-            <Select defaultValue="">
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Elija novedad" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="-" onClick={() => setStatus("-")}>-</SelectItem>
-                <SelectItem value="oferta" onClick={() => setStatus("Oferta")}>Oferta</SelectItem>
-                <SelectItem value="nuevo" onClick={() => setStatus("Nuevo")}>Nuevo</SelectItem>
-              </SelectContent>
+            <Select defaultValue="" onValueChange={handleStatusChange}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Elija novedad" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="-">-</SelectItem>
+                  <SelectItem value="oferta">Oferta</SelectItem>
+                  <SelectItem value="nuevo">Nuevo</SelectItem>
+                </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">

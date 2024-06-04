@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
@@ -27,10 +28,12 @@ model Album {
     price Float
     new String?
     artist String
+    formats Format[]
 }
 
 model Format{
     key Int @id @default(autoincrement())
-    id Int
+    albumId Int
+    album Album @relation(fields: [albumId], references: [id])
     format String
 }
