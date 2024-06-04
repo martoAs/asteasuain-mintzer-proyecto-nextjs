@@ -5,10 +5,10 @@ import { SelectValue, SelectTrigger, SelectItem, SelectContent, Select } from "@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { SetStateAction, useState } from "react"
-import { addProduct } from "./addProduct"
+
 import Link from "next/link";
 
-export function AddProduct() {
+export function EditProduct() {
 
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0.00);
@@ -27,17 +27,17 @@ export function AddProduct() {
     }
   };
 
-  const handleSaveProduct = async (event: { preventDefault: () => void }) => {
+  const handleEditProduct = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     try {
-      await addProduct(title, price, status, artist, formats);
+     // await addProduct(title, price, status, artist, formats);
       setTitle("");
       setPrice(0);
       setStatus("");
       setArtist("");
       setFormats([]);
     } catch (error) {
-      console.error('Error saving product:', error);
+      console.error('Error editing product:', error);
     }
   };
 
@@ -50,7 +50,7 @@ export function AddProduct() {
       <div className="container mx-auto max-w-4xl px-4 py-8">
       <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
         <h1 className="text-2xl font-bold mb-6">Añadir producto nuevo</h1>
-        <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSaveProduct}>
+        <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleEditProduct}>
           <div className="space-y-2">
             <Label htmlFor="title">Título del album</Label>
             <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto" />  
@@ -94,7 +94,7 @@ export function AddProduct() {
             </div>
           </div>
           <div className="mt-6 flex justify-end">
-            <Button type="submit" size="lg">Guardar producto</Button>
+            <Button type="submit" size="lg">Editar producto</Button>
           </div>
         </form>
         <Link href="/admin">

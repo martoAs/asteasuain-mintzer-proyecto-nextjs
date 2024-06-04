@@ -1,14 +1,15 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
 import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from "@/components/ui/table"
 import { JSX, SVGProps } from "react"
 import { signOut } from '@/auth';
 import Image from 'next/image';
+import {fetchProducts}  from './fetch';
+import {deleteAlbum} from './deleteProduct';
 
-
-export default function AdminPage() {
+export default async function AdminPage() {
+  const products = fetchProducts();
   return (
     <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
       <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
@@ -53,16 +54,6 @@ export default function AdminPage() {
             <span className="sr-only">Home</span>
           </Link>
           <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <SearchIcon className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-500 dark:text-gray-400" />
-                <Input
-                  className="w-full bg-white shadow-none appearance-none pl-8 md:w-2/3 lg:w-1/3 dark:bg-gray-950"
-                  placeholder="Buscar productos..."
-                  type="search"
-                />
-              </div>
-            </form>
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -113,30 +104,15 @@ export default function AdminPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Name</TableHead>
-                  <TableHead>Description</TableHead>
-                  <TableHead>Price</TableHead>
+                  <TableHead>Titulo album</TableHead>
+                  <TableHead>Artista</TableHead>
+                  <TableHead>Precio</TableHead>
+                  <TableHead>Formatos</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow>
-                  <TableCell className="font-medium">Acme Backpack</TableCell>
-                  <TableCell>A durable and stylish backpack for everyday use.</TableCell>
-                  <TableCell>$49.99</TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <Button size="icon" variant="outline">
-                        <DeleteIcon className="h-4 w-4" />
-                        <span className="sr-only">Edit</span>
-                      </Button>
-                      <Button size="icon" variant="outline">
-                        <Trash2Icon className="h-4 w-4" />
-                        <span className="sr-only">Delete</span>
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
+                  {(await products).map((product) => createTableCell(product))}
               </TableBody>
             </Table>
           </div>
@@ -146,67 +122,36 @@ export default function AdminPage() {
   )
 }
 
-function BellIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+
+function createTableCell(product: { id: number; title: any; price: any; new?: string | null; artist: any; formats?: any; }) {
+  const { title, artist, price, formats } = product;
+  const formattedFormats = formats.map((format: { format: any; }) => format.format).join(', ');
+
   return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>
-  )
-}
+    <TableRow key={product.id}>
+      <TableCell className="font-medium">{title}</TableCell>
+      <TableCell>{artist}</TableCell>
+      <TableCell>${price.toFixed(2)}</TableCell>
+      <TableCell>{formattedFormats}</TableCell>
+      <TableCell>
+        <div className="flex items-center gap-2">
+          <Button size="icon" variant="outline">
+            <DeleteIcon className="h-4 w-4" />
+            <span className="sr-only">Edit</span>
+          </Button>
+          <Button size="icon" variant="outline" 
+              onClick={async (e) => {
+                'use server';
+                deleteAlbum(product.id)
+              }}>
+            <Trash2Icon className="h-4 w-4" />
+            <span className="sr-only">Delete</span>
+          </Button>
+        </div>
+      </TableCell>
+    </TableRow>
+  );
 
-
-function DeleteIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z" />
-      <line x1="18" x2="12" y1="9" y2="15" />
-      <line x1="12" x2="18" y1="9" y2="15" />
-    </svg>
-  )
-}
-
-
-function LineChartIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M3 3v18h18" />
-      <path d="m19 9-5 5-4-4-3 3" />
-    </svg>
-  )
 }
 
 
@@ -275,8 +220,7 @@ function PlusIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   )
 }
 
-
-function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+function DeleteIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -290,12 +234,12 @@ function SearchIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <circle cx="11" cy="11" r="8" />
-      <path d="m21 21-4.3-4.3" />
+      <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z" />
+      <line x1="18" x2="12" y1="9" y2="15" />
+      <line x1="12" x2="18" y1="9" y2="15" />
     </svg>
   )
 }
-
 
 function Trash2Icon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
   return (
@@ -321,24 +265,3 @@ function Trash2Icon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
 }
 
 
-function UsersIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
-  )
-}
