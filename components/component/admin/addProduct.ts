@@ -1,5 +1,6 @@
 'use server';
 import { prisma } from '../../../lib/prisma';
+import {revalidatePath} from "next/cache";
 
 export async function addProduct(title: string, price: number, status: string, artist: string, formats: string[]) {
   try {
@@ -11,10 +12,11 @@ export async function addProduct(title: string, price: number, status: string, a
           new: status, 
           artist,
           formats: {
-            create: formats.map((format) => ({ format })),
+            connect: formats.map((format) => ({format: format })),
           },
         },
       });
+      revalidatePath("/admin")
 
       console.log(`Album created with ID: ${album.id}`);
     });

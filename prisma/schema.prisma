@@ -5,35 +5,34 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["relationJoins"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
-    id Int @id @default(autoincrement())
-    email String @unique
-    password String
-    name String?
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
 }
 
 model Album {
-    id Int @id @default(autoincrement())
-    title String
-    price Float
-    new String?
-    artist String
-    formats Format[]
+  id      Int      @id @default(autoincrement())
+  title   String
+  price   Float
+  new     String?
+  artist  String
+  formats Format[]
 }
 
-model Format{
-    key Int @id @default(autoincrement())
-    albumId Int
-    album Album @relation(fields: [albumId], references: [id])
-    format String
+model Format {
+  key    Int     @id @default(autoincrement())
+  albums Album[]
+  format String  @unique
 }
