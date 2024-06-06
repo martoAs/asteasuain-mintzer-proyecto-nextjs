@@ -2,7 +2,7 @@
 import GridOfCards from "@/components/component/store/GridOfCards";
 import SearchInput from "@/components/component/store/SearchInput";
 
-export function Principal({ data }:{data: Data[]}) {
+export function Principal({ data }:{data: ProductAPI[]}) {
 
 
     return (

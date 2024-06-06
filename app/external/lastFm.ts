@@ -1,14 +1,14 @@
 const DATA_SOURCE_URL = 'http://ws.audioscrobbler.com/2.0/';
 
-export async function getArtistData(artists: LastFMData[]) {
+export async function getArtistData(artists: Product[]) {
     const apiKey = process.env.LASTFM_API_KEY;
     const method = 'album.getInfo';
 
-    const fetchPromises = artists.map(({ id, artist, album }) => {
-        const url = `${DATA_SOURCE_URL}?method=${method}&artist=${artist}&album=${album}&api_key=${apiKey}&format=json`;
+    const fetchPromises = artists.map(({ id, artist, title, new : isNew, price, formats }) => {
+        const url = `${DATA_SOURCE_URL}?method=${method}&artist=${artist}&album=${title}&api_key=${apiKey}&format=json`;
         return fetch(url)
             .then(response => response.json())
-            .then(result => ({ ...result, id })); // Append the id to the result
+            .then(result => ({ ...result, id, price, formats, isNew})); // Append the id to the result
     });
 
     const results = await Promise.all(fetchPromises);
@@ -22,8 +22,11 @@ export async function getArtistData(artists: LastFMData[]) {
 
         return {
             id: item.id, // Use the id from the original artists array
-            albumName: album.name || '',
+            title: album.name || '',
+            price : item.price,
+            new : item.isNew,
             artist: album.artist || '',
+            formats: item.formats,
             summary: wiki.summary || 'No summary available', // Provide a default value if summary is not available
             imageUrl: album.image ? album.image.find((img: { size: string; }) => img.size === 'mega')?.['#text'] || '' : '',
             tags: tags.tag.map((tag: { name: string; }) => tag.name),

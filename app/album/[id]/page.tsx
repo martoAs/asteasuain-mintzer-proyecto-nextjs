@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function AlbumPage({params: {id}}: { params: { id: string } }) {
-    const artists = getArtists(id);
+    const artists = await getArtists(id);
     const results = await getArtistData(artists);
 
     const data = results[0]
@@ -67,11 +67,11 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
                             justifyContent="space-between"
                         >
                             <Typography level="h3" component="div">
-                                {data.albumName}
+                                {data.title}
                             </Typography>
 
                             <Typography level="h3" component="div">
-                                $4.50
+                                ${data.price}
                             </Typography>
                         </Stack>
                         <Typography className="py-5" level="body-xs">{data.artist}</Typography>

@@ -12,7 +12,23 @@ import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
 import Image from 'next/image';
 
 
-export function StoreCards({item}: { item: Data }) {
+export function StoreCards({item}: { item: ProductAPI }) {
+    const renderNewChip = (newStatus: string | null): React.ReactNode => {
+        if (newStatus) {
+            return (
+                <Chip
+                    component="span"
+                    variant="soft"
+                    color="success"
+                >
+                    {newStatus}
+                </Chip>
+            );
+        }
+        return null;
+    };
+
+
     return (
         <Card sx={{ width: 320, maxWidth: '100%', border: 'none'}} className="bg-[#EEEEEE]">
             <CardOverflow>
@@ -39,7 +55,7 @@ export function StoreCards({item}: { item: Data }) {
                         <MarqueeOnOverflow className="w-full"
                                            direction="horizontal"
                                            animation={["animate-marqueeX", "animate-marqueeX2"]}>
-                            <span className="text-nowrap">{item.albumName}</span>
+                            <span className="text-nowrap">{item.title}</span>
                         </MarqueeOnOverflow>
                     </Link>
 
@@ -48,12 +64,10 @@ export function StoreCards({item}: { item: Data }) {
                     level="title-lg"
                     sx={{ mt: 1, fontWeight: 'xl' }}
                     endDecorator={
-                        <Chip component="span" size="sm" variant="soft" color="success">
-                            Formato
-                        </Chip>
+                        renderNewChip(item.new)
                     }
                 >
-                    2,900 THB
+                    ${item.price}
                 </Typography>
             </CardContent>
             <CardOverflow>

@@ -1,4 +1,4 @@
-import {Principal} from "@/components/component/principal"
+import Principal from "@/components/component/principal"
 export default function Home() {
   return (
     <Principal/>

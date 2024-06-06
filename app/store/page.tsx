@@ -15,7 +15,7 @@ export default async function Page({
 
     //console.log(getArtists(query))
 
-    let artists = getArtists(query);
+    let artists = await getArtists(query);
     let results = await getArtistData(artists);
 
     return (
