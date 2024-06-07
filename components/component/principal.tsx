@@ -7,8 +7,8 @@ import Link from "next/link";
 
 export default function Principal() {
     return (
-        <section className="w-full  bg-[#191D23] text-gray-100">
-            <Carousel className="rounded-xl">
+        <section className="w-full  bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden">
+            <Carousel className="rounded-xl ">
                 <div className="relative h-full w-full">
                     <Image
                         src="https://images.unsplash.com/photo-1649495527004-68247643d82e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"

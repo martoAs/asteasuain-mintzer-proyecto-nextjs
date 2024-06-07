@@ -12,9 +12,10 @@ import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
 import Image from 'next/image';
 
 
-export function StoreCards({item}: { item: ProductAPI }) {
+export function StoreCard({item}: { item: ProductAPI }) {
+    const NULL_STATUS = "-";
     const renderNewChip = (newStatus: string | null): React.ReactNode => {
-        if (newStatus) {
+        if (newStatus != NULL_STATUS) {
             return (
                 <Chip
                     component="span"
@@ -72,8 +73,11 @@ export function StoreCards({item}: { item: ProductAPI }) {
             </CardContent>
             <CardOverflow>
                 <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD]" size="lg">
-                    Add to cart
+                    <Link href="/#" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        Add To Cart
+                    </Link>
                 </Button>
+
             </CardOverflow>
         </Card>
     );
