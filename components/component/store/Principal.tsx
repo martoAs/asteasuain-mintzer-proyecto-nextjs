@@ -2,12 +2,13 @@
 import GridOfCards from "@/components/component/store/GridOfCards";
 import SearchInput from "@/components/component/store/SearchInput";
 import PaginationControls from "@/components/component/store/PaginationControls";
+import {AlbumComplete} from "@/app/data/data";
 
 interface PrincipalProps {
     start: number;
     end: number;
     length: number;
-    data: ProductAPI[];
+    data: AlbumComplete[];
 }
 
 export function Principal({ start, end, length, data }: PrincipalProps) {

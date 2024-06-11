@@ -1,26 +1,12 @@
-interface ProductAPI {
-    id: number;
-    title: string;
-    price: number;
-    new: string | null;
-    artist: string;
-    formats: Format[];
+import {Album, Format} from "@prisma/client"
+
+export interface AlbumComplete extends AlbumWithFormats {
     summary: string;
     imageUrl: string;
     tags: string[];
 }
 
-interface Format {
-    key: number;
-    albumId: number;
-    format: string;
-}
 
-interface Product {
-    id: number;
-    title: string;
-    price: number;
-    new: string | null;
-    artist: string;
-    formats: Format[];
+export interface AlbumWithFormats extends Album{
+    formats: Format[]
 }

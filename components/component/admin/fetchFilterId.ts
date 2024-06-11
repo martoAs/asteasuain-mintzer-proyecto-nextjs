@@ -1,5 +1,5 @@
 'use server';
-import {prisma} from '../../../lib/prisma';
+import {prisma} from '@/lib/prisma';
 
 export async function fetchProductsFilteredForId(id: number) {
 
@@ -10,7 +10,7 @@ export async function fetchProductsFilteredForId(id: number) {
                     equals: id
                 }
             },
-            include: {formats: true},
+            include: {formats: true}
         })
     }catch(error){
         console.error("Error fetching products:", error);

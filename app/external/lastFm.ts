@@ -1,6 +1,8 @@
+import {AlbumWithFormats} from "@/app/data/data";
+
 const DATA_SOURCE_URL = 'http://ws.audioscrobbler.com/2.0/';
 
-export async function getArtistData(artists: Product[]) {
+export async function getArtistData(artists: AlbumWithFormats[]) {
     const apiKey = process.env.LASTFM_API_KEY;
     const method = 'album.getInfo';
 

@@ -10,9 +10,10 @@ import Typography from '@mui/joy/Typography';
 import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
 import Image from 'next/image';
+import {AlbumComplete} from "@/app/data/data";
 
 
-export function StoreCard({item}: { item: ProductAPI }) {
+export function StoreCard({item}: { item: AlbumComplete }) {
     const NULL_STATUS = "-";
     const renderNewChip = (newStatus: string | null): React.ReactNode => {
         if (newStatus != NULL_STATUS) {

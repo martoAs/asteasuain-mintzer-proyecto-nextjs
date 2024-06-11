@@ -1,6 +1,7 @@
 import {StoreCard} from './StoreCard';
+import {AlbumComplete} from "@/app/data/data";
 
-export default function GridOfCards({data}: { data: ProductAPI[] }) {
+export default function GridOfCards({data}: { data: AlbumComplete[] }) {
     return (
         <div className="grid gap-5 p-20 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6">
             {data.map(item => (

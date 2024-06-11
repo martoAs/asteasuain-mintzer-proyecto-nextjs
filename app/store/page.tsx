@@ -1,12 +1,12 @@
 import { Principal } from '@/components/component/store/Principal';
 import { getArtistData } from "@/app/external/lastFm";
 import { getArtists } from "@/app/data/getArtists";
-import PaginationControls from "@/components/component/store/PaginationControls";
+import {notFound} from "next/navigation";
 
 export default async function Page({
                                        searchParams,
                                    }: {
-    searchParams: { [key: string]: string | string[] | undefined }
+    searchParams: { [key: string]: string | undefined }
 }) {
     const query = searchParams?.query || '';
     const page = Number(searchParams?.page) || 1;
@@ -16,14 +16,11 @@ export default async function Page({
     const end = start + per_page;
 
     let artists = await getArtists(query);
-    let formattedProducts: Product[] = artists.map(product => ({
-        ...product,
-        formats: product.formats.map(format => ({
-            ...format,
-            albumId: product.id // Asigna el albumId correctamente
-        }))
-    }));
-    let results = await getArtistData(formattedProducts);
+    let results = await getArtistData(artists);
+
+    if (results.length == 0) {
+        notFound()
+    }
 
     const entries = results.slice(start, end);
 
