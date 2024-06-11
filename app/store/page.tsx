@@ -16,7 +16,14 @@ export default async function Page({
     const end = start + per_page;
 
     let artists = await getArtists(query);
-    let results = await getArtistData(artists);
+    let formattedProducts: Product[] = artists.map(product => ({
+        ...product,
+        formats: product.formats.map(format => ({
+            ...format,
+            albumId: product.id // Asigna el albumId correctamente
+        }))
+    }));
+    let results = await getArtistData(formattedProducts);
 
     const entries = results.slice(start, end);
 

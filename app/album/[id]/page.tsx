@@ -1,12 +1,12 @@
 import * as React from "react";
-import {getArtists} from "@/app/data/getArtists";
 import {getArtistData} from "@/app/external/lastFm";
 import AlbumPageComponent from "@/components/component/store/AlbumPageComponent";
+import {fetchProductsFilteredForId} from "@/components/component/admin/fetchFilterId";
 
 export default async function AlbumPage({params: {id}}: { params: { id: string } }) {
-    const artists = await getArtists(id);
+    const artists = await fetchProductsFilteredForId(Number(id));
     const results = await getArtistData(artists);
-
+    console.log(results)
     const data = results[0]
 
 
