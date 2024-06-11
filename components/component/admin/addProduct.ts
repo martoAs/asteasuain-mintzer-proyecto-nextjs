@@ -4,24 +4,25 @@ import {revalidatePath} from "next/cache";
 
 export async function addProduct(title: string, price: number, status: string, artist: string, formats: string[]) {
   try {
-    await prisma.$transaction(async (prisma) => {
-      const album = await prisma.album.create({
-        data: {
-          title,
-          price,
-          new: status, 
-          artist,
-          formats: {
-            connect: formats.map((format) => ({format: format })),
+    if(price>0){
+      await prisma.$transaction(async (prisma) => {
+        const album = await prisma.album.create({
+          data: {
+            title,
+            price,
+            new: status,
+            artist,
+            formats: {
+              connect: formats.map((format) => ({format: format })),
+            },
           },
-        },
-      });
-      revalidatePath("/admin")
+        });
+        revalidatePath("/admin")
 
-      console.log(`Album created with ID: ${album.id}`);
-    });
+        console.log(`Album created with ID: ${album.id}`);
+      });
+    }
   } catch (error) {
     console.error("Error adding product:", error);
-    // Rollback the transaction if an error occurs
   }
 }

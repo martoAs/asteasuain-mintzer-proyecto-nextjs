@@ -53,7 +53,7 @@ export function AddProduct() {
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSaveProduct}>
           <div className="space-y-2">
             <Label htmlFor="title">Título del album</Label>
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto" />  
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto" required/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="price">Precio</Label>
@@ -61,7 +61,7 @@ export function AddProduct() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="status">Novedad del producto</Label>
-            <Select defaultValue="" onValueChange={handleStatusChange}>
+            <Select defaultValue="-" onValueChange={handleStatusChange}>
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Elija novedad" />
                 </SelectTrigger>
@@ -74,7 +74,7 @@ export function AddProduct() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="artist">Nombre del artista</Label>
-            <Input id="artist" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Ingrese el nombre del artista" />
+            <Input id="artist" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Ingrese el nombre del artista" required/>
           </div>
           <div className="space-y-2">
             <Label htmlFor="status">Formato del producto</Label>
@@ -93,9 +93,13 @@ export function AddProduct() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex justify-end">
-            <Button type="submit" size="lg">Guardar producto</Button>
-          </div>
+          {formats.length > 0 ? (
+              <Button type="submit" size="lg">Guardar producto</Button>
+          ) : (
+              <Button type="submit" size="lg" disabled>
+                Guardar producto (Sin productos)
+              </Button>
+          )}
         </form>
         <Link href="/admin">
           <div className="mt-6 flex justify-end">
