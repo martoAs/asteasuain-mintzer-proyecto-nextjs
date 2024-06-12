@@ -8,21 +8,18 @@ import { SetStateAction, useState } from "react"
 
 import Link from "next/link";
 
-export function EditProduct() {
+export function EditProduct(titulo: string, precio: number, estado: string, artista: string, formatos: string[]){
 
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState(0.00);
-  const [status, setStatus] = useState("");
-  const [artist, setArtist] = useState("");
-  const [formats, setFormats] = useState<string[]>([]);
+  const [title, setTitle] = useState(titulo);
+  const [price, setPrice] = useState(precio);
+  const [status, setStatus] = useState(estado);
+  const [artist, setArtist] = useState(artista);
+  const [formats, setFormats] = useState<string[]>(formatos);
 
   const handleCheckboxChange = (value: string) => {
-    // Check if the value is already in the array
     if (formats.includes(value)) {
-      // If it is, remove it from the array
       setFormats(formats.filter((format) => format !== value));
     } else {
-      // If it's not, add it to the array
       setFormats([...formats, value]);
     }
   };
@@ -93,16 +90,19 @@ export function EditProduct() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex justify-end">
-            <Button type="submit" size="lg">Editar producto</Button>
-          </div>
+          {formats.length > 0 ? (
+              <Button type="submit" size="lg">Editar producto</Button>
+          ) : (
+              <Button type="submit" size="lg" disabled>
+                Editar producto (Faltan datos)
+              </Button>
+          )}
         </form>
         <Link href="/admin">
           <div className="mt-6 flex justify-end">
             <Button size="lg">Volver</Button>
           </div>
         </Link>
-
       </div>
     </div>
     

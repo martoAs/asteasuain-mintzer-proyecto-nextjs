@@ -1,3 +1,4 @@
+"use client";
 import Button from '@mui/joy/Button';
 import * as React from "react";
 import {Divider, Stack} from "@mui/joy";
@@ -6,7 +7,6 @@ import {FaArrowLeft} from "react-icons/fa";
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
 import Link from "next/link";
 
 import Typography from "@mui/joy/Typography";
@@ -15,8 +15,17 @@ import formatRadioButtons from "@/components/component/store/Formats";
 import renderSummaryWithoutLink from "@/components/component/store/RenderSummary";
 import tags from "@/components/component/store/Tags";
 import Image from "next/image";
+import {AlbumComplete} from "@/app/data/data";
+import {addProductToCart} from "./manageProductInCart";
+import {ThemeProvider} from "@material-tailwind/react";
+import value = ThemeProvider.propTypes.value;
 
-export default function AlbumPageComponent({data}: { data: ProductAPI }) {
+export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
+    const [quantity, setQuantity] = React.useState(1);
+    const [format, setFormat] = React.useState(data.formats[0].format);
+    const handleIncrement = () => setQuantity(quantity + 1);
+    const handleDecrement = () => {if(quantity>1) setQuantity(quantity - 1);}
+
     return (
         <div
             className=" lg:p-36 bg-[#191D23] text-gray-100  flex flex-col justify-center min-h-screen overflow-hidden ">
@@ -86,14 +95,36 @@ export default function AlbumPageComponent({data}: { data: ProductAPI }) {
                         <FormLabel id="demo-radio-buttons-group-label">Elija un formato</FormLabel>
                         <RadioGroup
                             aria-labelledby="demo-radio-buttons-group-label"
-                            defaultValue={data.formats[0].format}
+                            defaultValue={format}
                             name="radio-buttons-group"
+                            onChange={(event) => setFormat(event.target.value)}
                         >
                             {formatRadioButtons(data.formats)}
                         </RadioGroup>
                     </FormControl>
 
-                    <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD] my-5" size="lg">
+                    <div className="flex items-center gap-2 bg-gray-100 rounded-md p-2 dark:bg-gray-800">
+                        <Button
+                            variant="solid"
+                            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                            onClick={handleDecrement}
+                        >
+                            <MinusIcon className="h-4 w-4"/>
+                        </Button>
+                        <div className="flex-1 text-center text-base font-medium text-black">{quantity}</div>
+                        <Button
+                            variant="solid"
+                            className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
+                            onClick={handleIncrement}
+                        >
+                            <PlusIcon className="h-4 w-4"/>
+                        </Button>
+                    </div>
+
+
+                    <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD] my-5" size="lg"
+                        onClick={() => addProductToCart(data.id, data.title, data.price*quantity, quantity, format)}
+                        >
                         <Link href="/#" style={{textDecoration: 'none', color: 'inherit'}}>
                             Add To Cart
                         </Link>
@@ -103,4 +134,45 @@ export default function AlbumPageComponent({data}: { data: ProductAPI }) {
             </div>
         </div>
     );
+}
+
+
+function MinusIcon(props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M5 12h14"/>
+        </svg>
+    )
+}
+
+
+function PlusIcon(props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>) {
+    return (
+        <svg
+            {...props}
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+        </svg>
+    )
 }

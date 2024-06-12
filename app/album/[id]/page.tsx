@@ -6,7 +6,6 @@ import {fetchProductsFilteredForId} from "@/components/component/admin/fetchFilt
 export default async function AlbumPage({params: {id}}: { params: { id: string } }) {
     const artists = await fetchProductsFilteredForId(Number(id));
     const results = await getArtistData(artists);
-    console.log(results)
     const data = results[0]
 
 

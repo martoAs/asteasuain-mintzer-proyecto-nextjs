@@ -10,3 +10,11 @@ export interface AlbumComplete extends AlbumWithFormats {
 export interface AlbumWithFormats extends Album{
     formats: Format[]
 }
+
+export interface Item{
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    format: string;
+}
