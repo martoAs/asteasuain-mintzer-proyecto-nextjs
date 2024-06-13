@@ -1,7 +1,7 @@
 import {fetchProducts} from "@/components/component/admin/fetch";
 import {fetchProductsFiltered} from "@/components/component/admin/fetchFilter";
 
-export async function getArtists(query?: string){
+export async function getArtists(page : number, query?: string){
 
 
     // If query is provided, filter the array based on the query
@@ -9,7 +9,7 @@ export async function getArtists(query?: string){
         return await fetchProductsFiltered(query)
     }
     else{
-        return await fetchProducts();
+        return await fetchProducts(page);
     }
 
 }

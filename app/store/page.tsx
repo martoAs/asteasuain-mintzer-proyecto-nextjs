@@ -12,21 +12,17 @@ export default async function Page({
     const page = Number(searchParams?.page) || 1;
     const per_page = Number(searchParams?.per_page) || 12;
 
-    const start = (page - 1) * per_page;
-    const end = start + per_page;
 
-    let artists = await getArtists(query);
+    let artists = await getArtists(page, query);
     let results = await getArtistData(artists);
 
     if (results.length == 0) {
         notFound()
     }
 
-    const entries = results.slice(start, end);
-
     return (
         <>
-            <Principal start={start} end={end} length={results.length} data={entries} />
+            <Principal data={results} />
 
         </>
     );

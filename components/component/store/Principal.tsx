@@ -4,26 +4,18 @@ import SearchInput from "@/components/component/store/SearchInput";
 import PaginationControls from "@/components/component/store/PaginationControls";
 import {AlbumComplete} from "@/app/data/data";
 
-interface PrincipalProps {
-    start: number;
-    end: number;
-    length: number;
-    data: AlbumComplete[];
-}
-
-export function Principal({ start, end, length, data }: PrincipalProps) {
+export function Principal({data}:{data: AlbumComplete[]}) {
     return (
-        <div className="py-12 md:py-24 lg:py-32 bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden">
+        <div
+            className="py-12 md:py-24 lg:py-32 bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden">
             <section className="w-1/2 flex justify-center">
-                <SearchInput />
+                <SearchInput/>
             </section>
             <section>
-                <GridOfCards data={data} />
+                <GridOfCards data={data}/>
             </section>
             <section>
                 <PaginationControls
-                    hasNextPage={end < length}
-                    hasPrevPage={start > 0}
                 />
             </section>
         </div>
