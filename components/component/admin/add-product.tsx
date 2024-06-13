@@ -47,7 +47,7 @@ export function AddProduct() {
 
 
   return (
-      <div className="container mx-auto max-w-4xl px-4 py-8">
+      <div className="flex flex-col items-center justify-center min-h-screen overflow-hidden relative container mx-auto max-w-4xl px-4 py-8">
       <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
         <h1 className="text-2xl font-bold mb-6">Añadir producto nuevo</h1>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSaveProduct}>
