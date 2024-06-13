@@ -25,8 +25,7 @@ export default async function CartPage() {
                         {cartItems.map((item) => (
                             <div key={item.id} className="grid grid-cols-[1fr_2fr_auto] items-center gap-4">
                                 <div className="grid gap-1">
-                                    <h3 className="text-sm sm:text-base font-semibold">Nombre del
-                                        album: {item.name}</h3>
+                                    <h3 className="text-md sm:text-base font-semibold">{item.name}</h3>
                                     <div className="flex items-center gap-2">
                                         <span className="text-sm sm:text-base"> Cantidad {item.quantity}</span>
                                     </div>
@@ -51,8 +50,8 @@ export default async function CartPage() {
                     </div>
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 grid gap-4">
                         <div className="flex justify-between items-center">
-                            <span className="text-lg font-semibold">Total</span>
-                            <span className="text-lg font-semibold">${getTotal().toFixed(2)}</span>
+                            <span className="text-lg font-semibold text-black">Total</span>
+                            <span className="text-lg font-semibold text-black">${getTotal().toFixed(2)}</span>
                         </div>
                         <Button className="w-full">Proceed to Checkout</Button>
                     </div>
