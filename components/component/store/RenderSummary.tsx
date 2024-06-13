@@ -1,8 +1,9 @@
 import Typography from "@mui/joy/Typography";
 import Link from "next/link";
 import * as React from "react";
+import {AlbumComplete} from "@/app/data/data";
 
-export default function renderSummaryWithoutLink(data : ProductAPI, summary: string) {
+export default function renderSummaryWithoutLink(data : AlbumComplete, summary: string) {
     // Buscar coincidencias de enlaces en el resumen original
     const linkRegex = /<a\s+href=["']([^"']*)["'][^>]*>(.*?)<\/a>/gi;
     const match = linkRegex.exec(summary);
