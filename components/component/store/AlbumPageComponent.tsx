@@ -123,7 +123,7 @@ export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
 
 
                     <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD] my-5" size="lg"
-                        onClick={() => addProductToCart(data.id, data.title, data.price*quantity, quantity, format)}
+                        onClick={() => addProductToCart(data.id, quantity, format)}
                         >
                         <Link href="/#" style={{textDecoration: 'none', color: 'inherit'}}>
                             Add To Cart

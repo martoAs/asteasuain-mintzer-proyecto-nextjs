@@ -14,8 +14,11 @@ export interface AlbumWithFormats extends Album{
 
 export interface Item{
     id: number;
-    name: string;
-    price: number;
     quantity: number;
     format: string;
+}
+
+export interface ItemBD extends Item{
+    price: number;
+    name: string;
 }

@@ -1,11 +1,12 @@
 import {JSX, SVGProps} from "react"
 import {Button} from "@/components/ui/button"
 import {Separator} from "@/components/ui/separator"
-import {getCart, removeFromCart} from "@/components/component/cart/sessionData";
+import {getCart, removeFromCart, obtainFromBD} from "@/components/component/cart/sessionData";
 import {Item} from "@/app/data/data";
 
 export default async function CartPage() {
-    const cartItems = await getCart();
+    const cart = await getCart();
+    const cartItems = await obtainFromBD(cart);
     const getTotal = () => {
         let total = 0;
         for (const item of cartItems) {
@@ -13,7 +14,6 @@ export default async function CartPage() {
         }
         return total;
     }
-
 
     return (
         <div
@@ -35,7 +35,7 @@ export default async function CartPage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span
-                                        className="text-sm sm:text-base font-semibold">Precio: ${item.price.toFixed(2)}</span>
+                                        className="text-sm sm:text-base font-semibold">Precio: ${(item.quantity*item.price).toFixed(2)}</span>
                                     <form>
                                         <Button variant="ghost" size="icon" className="p-1" formAction={async () => {
                                             "use server";
