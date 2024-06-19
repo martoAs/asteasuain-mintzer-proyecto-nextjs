@@ -1,10 +1,15 @@
 'use client';
 import GridOfCards from "@/components/component/store/GridOfCards";
 import SearchInput from "@/components/component/store/SearchInput";
-import PaginationControls from "@/components/component/store/PaginationControls";
+import PaginationControls from "@/components/component/PaginationControls";
 import {AlbumComplete} from "@/app/data/data";
 
-export function Principal({data}:{data: AlbumComplete[]}) {
+type PrincipalProps = {
+    data: AlbumComplete[];
+    count: number;
+};
+
+export function Principal({ data, count }: PrincipalProps) {
     return (
         <div
             className="py-12 md:py-24 lg:py-32 bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden">
@@ -15,7 +20,7 @@ export function Principal({data}:{data: AlbumComplete[]}) {
                 <GridOfCards data={data}/>
             </section>
             <section>
-                <PaginationControls
+                <PaginationControls cantPages={count}
                 />
             </section>
         </div>

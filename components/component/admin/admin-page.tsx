@@ -5,15 +5,20 @@ import {TableHead, TableRow, TableHeader, TableCell, TableBody, Table} from "@/c
 import {JSX, SVGProps} from "react"
 import {signOut} from '@/auth';
 import Image from 'next/image';
-import {fetchProducts} from './fetch';
+import {countProducts, fetchProducts} from './fetch';
 import {deleteAlbum} from './deleteProduct';
-import PaginationControls from "@/components/component/store/PaginationControls";
+import PaginationControls from "@/components/component/PaginationControls";
 import {AlbumWithFormats} from "@/app/data/data";
 
+type PrincipalProps = {
+    data: AlbumWithFormats[];
+    count: number;
+};
 
-export default async function AdminPage({page}: { page: number }) {
+export default async function AdminPage({ data, count }: PrincipalProps) {
 
-    const products = await fetchProducts(page);
+
+
     return (
         <div className="flex flex-col justify-center">
             <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
@@ -111,7 +116,7 @@ export default async function AdminPage({page}: { page: number }) {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {products.map(
+                                    {data.map(
                                         (product) => createTableCell(product))
                                     }
                                 </TableBody>
@@ -120,7 +125,7 @@ export default async function AdminPage({page}: { page: number }) {
                     </main>
                 </div>
             </div>
-            <PaginationControls/>
+            <PaginationControls cantPages={count}/>
         </div>
     )
 }
