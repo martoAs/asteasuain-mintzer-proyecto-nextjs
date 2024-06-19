@@ -1,6 +1,7 @@
 'use server';
 import { prisma } from '../../../lib/prisma';
 import { UpdateAlbumInput } from '../../../app/lib/definitions';
+import {revalidatePath} from "next/cache";
 
 
 export async function updateAlbum(id: number, title: string, price: number, status: string, artist: string, formats: string[]) {
@@ -18,6 +19,7 @@ export async function updateAlbum(id: number, title: string, price: number, stat
                 },
             },
         });
+        revalidatePath("/admin");
     } catch (error) {
         console.error("Error updating album:", error);
     }
