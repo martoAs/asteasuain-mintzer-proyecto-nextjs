@@ -7,14 +7,20 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { SetStateAction, useState } from "react"
 
 import Link from "next/link";
+import {AlbumWithFormats} from "@/app/data/data";
 
-export function EditProduct(titulo: string, precio: number, estado: string, artista: string, formatos: string[]){
+export function EditProduct({data}: {data : AlbumWithFormats} ){
 
-  const [title, setTitle] = useState(titulo);
-  const [price, setPrice] = useState(precio);
-  const [status, setStatus] = useState(estado);
-  const [artist, setArtist] = useState(artista);
-  const [formats, setFormats] = useState<string[]>(formatos);
+  const [title, setTitle] = useState(data.title);
+  const [price, setPrice] = useState(data.price);
+  const [status, setStatus] = useState("");
+  const [artist, setArtist] = useState(data.artist);
+  const [formats, setFormats] = useState<string[]>(data.formats.map((format) => format.format))
+
+  //Si tengo estado nuevo u oferta lo seteo
+  if(data.new){
+    setStatus(data.new)
+  }
 
   const handleCheckboxChange = (value: string) => {
     if (formats.includes(value)) {
