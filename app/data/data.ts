@@ -22,3 +22,11 @@ export interface ItemBD extends Item{
     price: number;
     name: string;
 }
+
+export interface MyFormData {
+    title: string;
+    price: number;
+    new: string;
+    artist: string;
+    formats: string[];
+}

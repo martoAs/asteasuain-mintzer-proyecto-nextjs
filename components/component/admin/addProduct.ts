@@ -4,7 +4,7 @@ import {revalidatePath} from "next/cache";
 
 export async function addProduct(title: string, price: number, status: string, artist: string, formats: string[]) {
   try {
-    if(price>0){
+
       await prisma.$transaction(async (prisma) => {
         const album = await prisma.album.create({
           data: {
@@ -21,7 +21,7 @@ export async function addProduct(title: string, price: number, status: string, a
 
         console.log(`Album created with ID: ${album.id}`);
       });
-    }
+
   } catch (error) {
     console.error("Error adding product:", error);
   }
