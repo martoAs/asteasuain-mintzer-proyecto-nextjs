@@ -1,19 +1,13 @@
 import {JSX, SVGProps} from "react"
 import {Button} from "@/components/ui/button"
 import {Separator} from "@/components/ui/separator"
-import {getCart, removeFromCart, obtainFromBD} from "@/components/component/cart/sessionData";
+import {getCart, removeFromCart, obtainFromBD, getTotalFromCart} from "@/components/component/cart/sessionData";
 import {Item} from "@/app/data/data";
 
 export default async function CartPage() {
     const cart = await getCart();
     const cartItems = await obtainFromBD(cart);
-    const getTotal = () => {
-        let total = 0;
-        for (const item of cartItems) {
-            total += item.price * item.quantity;
-        }
-        return total;
-    }
+    const getTotal = await getTotalFromCart()
 
     return (
         <div
@@ -51,7 +45,7 @@ export default async function CartPage() {
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 grid gap-4">
                         <div className="flex justify-between items-center">
                             <span className="text-lg font-semibold text-black">Total</span>
-                            <span className="text-lg font-semibold text-black">${getTotal().toFixed(2)}</span>
+                            <span className="text-lg font-semibold text-black">${getTotal.toFixed(2)}</span>
                         </div>
                         <Button className="w-full">Proceed to Checkout</Button>
                     </div>

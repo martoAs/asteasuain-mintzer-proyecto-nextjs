@@ -53,3 +53,13 @@ export async function existsProduct(productId: number): Promise<boolean> {
     return cart.some((item) => item.id === productId);
 }
 
+export async function getTotalFromCart(): Promise<number> {
+    let cart = await getCart();
+    let cartItems = await obtainFromBD(cart);
+    let total = 0;
+    for (const item of cartItems) {
+        total += item.quantity*item.price;
+    }
+    return total;
+}
+
