@@ -8,12 +8,12 @@ import Image from 'next/image';
 import {fetchProducts} from './fetch';
 import {deleteAlbum} from './deleteProduct';
 import PaginationControls from "@/components/component/store/PaginationControls";
-
+import {AlbumWithFormats} from "@/app/data/data";
 
 
 export default async function AdminPage({page}: { page: number }) {
 
-    const products = fetchProducts(page);
+    const products = await fetchProducts(page);
     return (
         <div className="flex flex-col justify-center">
             <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
@@ -111,7 +111,9 @@ export default async function AdminPage({page}: { page: number }) {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {(await products).map((product) => createTableCell(product))}
+                                    {products.map(
+                                        (product) => createTableCell(product))
+                                    }
                                 </TableBody>
                             </Table>
                         </div>
@@ -124,35 +126,26 @@ export default async function AdminPage({page}: { page: number }) {
 }
 
 
-function createTableCell(product: {
-    id: number;
-    title: any;
-    price: any;
-    new?: string | null;
-    artist: any;
-    formats?: any;
-}) {
-    const {title, artist, price, formats} = product;
-    const formattedFormats = formats.map((format: { format: any; }) => format.format).join(', ');
+function createTableCell(data: AlbumWithFormats) {
+    const formattedFormats = data.formats.map((format: { format: any; }) => format.format).join(', ');
 
     return (
-        <TableRow key={product.id}>
-            <TableCell className="font-medium">{title}</TableCell>
-            <TableCell>{artist}</TableCell>
-            <TableCell>${price.toFixed(2)}</TableCell>
+        <TableRow key={data.id}>
+            <TableCell className="font-medium">{data.title}</TableCell>
+            <TableCell>{data.artist}</TableCell>
+            <TableCell>${data.price.toFixed(2)}</TableCell>
             <TableCell>{formattedFormats}</TableCell>
             <TableCell>
                 <div className="flex items-center gap-2">
-                    <Button size="icon" variant="outline">
-                        <DeleteIcon className="h-4 w-4"/>
-                        <Link href={`/edit/${product.id}`}>
+                    <Link href={`admin/edit/${data.id}`}>
+                        <Button size="icon" variant="outline">
                             <span className="sr-only">Edit</span>
-                        </Link>
-
-                    </Button>
+                            <DeleteIcon className="h-4 w-4" />
+                        </Button>
+                    </Link>
                     <form>
                         <Button type="submit" size="icon" variant="outline"
-                                formAction={deleteAlbum.bind(null, product.id)}>
+                                formAction={deleteAlbum.bind(null, data.id)}>
                             <Trash2Icon className="h-4 w-4"/>
                             <span className="sr-only">Delete</span>
                         </Button>
