@@ -1,15 +1,14 @@
-"use client";
-
 import Link from "next/link"
 import {Button} from "@/components/ui/button"
 import {DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu} from "@/components/ui/dropdown-menu"
 import {TableHead, TableRow, TableHeader, TableCell, TableBody, Table} from "@/components/ui/table"
-import {JSX, SVGProps, useState} from "react"
+import {JSX, SVGProps} from "react"
 import {signOut} from '@/auth';
 import Image from 'next/image';
 import {fetchProducts} from './fetch';
 import {deleteAlbum} from './deleteProduct';
 import PaginationControls from "@/components/component/store/PaginationControls";
+
 
 
 export default async function AdminPage({page}: { page: number }) {
@@ -112,7 +111,7 @@ export default async function AdminPage({page}: { page: number }) {
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
-                                    {(await products).map((product) => CreateTableCell(product))}
+                                    {(await products).map((product) => createTableCell(product))}
                                 </TableBody>
                             </Table>
                         </div>
@@ -125,7 +124,7 @@ export default async function AdminPage({page}: { page: number }) {
 }
 
 
-function CreateTableCell(product: {
+function createTableCell(product: {
     id: number;
     title: any;
     price: any;
@@ -135,7 +134,6 @@ function CreateTableCell(product: {
 }) {
     const {title, artist, price, formats} = product;
     const formattedFormats = formats.map((format: { format: any; }) => format.format).join(', ');
-    const [showConfirmation, setShowConfirmation] = useState(false);
 
     return (
         <TableRow key={product.id}>
@@ -149,32 +147,13 @@ function CreateTableCell(product: {
                         <DeleteIcon className="h-4 w-4"/>
                         <span className="sr-only">Edit</span>
                     </Button>
-
-                    <Button type="submit" size="icon" variant="outline"
-                            onClick={() => setShowConfirmation(true)}>
-                        <Trash2Icon className="h-4 w-4"/>
-                        <span className="sr-only">Delete</span>
-                    </Button>
-
-
-                    {showConfirmation && (
-                        <div className="tu-clase-de-popup"> {/* Asegúrate de aplicar tus estilos al pop-up */}
-                            <p>¿Estás seguro de que quieres eliminar este álbum?</p>
-                            <form>
-                                <Button type="submit" size="icon" variant="outline"
-                                        formAction={deleteAlbum.bind(null, product.id)}>
-                                    <Trash2Icon className="h-4 w-4"/>
-                                    <span className="sr-only">Confirmar</span>
-                                </Button>
-                            </form>
-
-                            <Button type="submit" size="icon" variant="outline"
-                                    onClick={() => setShowConfirmation(false)}>
-                                <Trash2Icon className="h-4 w-4"/>
-                                <span className="sr-only">Cancelar</span>
-                            </Button>
-                        </div>
-                    )}
+                    <form>
+                        <Button type="submit" size="icon" variant="outline"
+                                formAction={deleteAlbum.bind(null, product.id)}>
+                            <Trash2Icon className="h-4 w-4"/>
+                            <span className="sr-only">Delete</span>
+                        </Button>
+                    </form>
                 </div>
             </TableCell>
         </TableRow>
@@ -292,5 +271,3 @@ function Trash2Icon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
         </svg>
     )
 }
-
-
