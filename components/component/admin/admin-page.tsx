@@ -5,7 +5,6 @@ import {TableHead, TableRow, TableHeader, TableCell, TableBody, Table} from "@/c
 import {JSX, SVGProps} from "react"
 import {signOut} from '@/auth';
 import Image from 'next/image';
-import {countProducts, fetchProducts} from './fetch';
 import {deleteAlbum} from './deleteProduct';
 import PaginationControls from "@/components/component/PaginationControls";
 import {AlbumWithFormats} from "@/app/data/data";
@@ -16,8 +15,6 @@ type PrincipalProps = {
 };
 
 export default async function AdminPage({ data, count }: PrincipalProps) {
-
-
 
     return (
         <div className="flex flex-col justify-center">

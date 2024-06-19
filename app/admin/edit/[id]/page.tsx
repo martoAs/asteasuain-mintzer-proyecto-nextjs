@@ -9,8 +9,8 @@ export default async function Page({params: {id}}: { params: { id: string } }) {
         fetchProductsFilteredForId(Number(id))
     ]);
 
-    if (!data) {
-        NotFoundPage();
+    if (data.length == 0) {
+        return NotFoundPage();
     }
     return (
         <>
