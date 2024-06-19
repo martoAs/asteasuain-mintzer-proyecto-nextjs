@@ -145,7 +145,10 @@ function createTableCell(product: {
                 <div className="flex items-center gap-2">
                     <Button size="icon" variant="outline">
                         <DeleteIcon className="h-4 w-4"/>
-                        <span className="sr-only">Edit</span>
+                        <Link href={`/edit/${product.id}`}>
+                            <span className="sr-only">Edit</span>
+                        </Link>
+
                     </Button>
                     <form>
                         <Button type="submit" size="icon" variant="outline"
