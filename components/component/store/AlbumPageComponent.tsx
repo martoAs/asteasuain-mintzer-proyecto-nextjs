@@ -1,4 +1,5 @@
 "use client";
+import {useState, useEffect} from 'react';
 import Button from '@mui/joy/Button';
 import * as React from "react";
 import {Divider, Stack} from "@mui/joy";
@@ -16,15 +17,28 @@ import renderSummaryWithoutLink from "@/components/component/store/RenderSummary
 import tags from "@/components/component/store/Tags";
 import Image from "next/image";
 import {AlbumComplete} from "@/app/data/data";
-import {addProductToCart} from "./manageProductInCart";
-import {ThemeProvider} from "@material-tailwind/react";
-import value = ThemeProvider.propTypes.value;
+import {addProductToCart, isProductInCart, removeProductFromCart} from "./manageProductInCart";
 
 export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
     const [quantity, setQuantity] = React.useState(1);
     const [format, setFormat] = React.useState(data.formats[0].format);
     const handleIncrement = () => setQuantity(quantity + 1);
-    const handleDecrement = () => {if(quantity>1) setQuantity(quantity - 1);}
+    const handleDecrement = () => {
+        if (quantity > 1) setQuantity(quantity - 1);
+    }
+
+
+    const [isInCart, setIsInCart] = useState(false);
+
+    useEffect(() => {
+        const checkCartStatus = async () => {
+            const inCart = await isProductInCart(data.id);
+            setIsInCart(inCart);
+        };
+
+        checkCartStatus();
+    }, [data.id]);
+
 
     return (
         <div
@@ -122,12 +136,23 @@ export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
                     </div>
 
 
-                    <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD] my-5" size="lg"
-                        onClick={() => addProductToCart(data.id, quantity, format)}
-                        >
-                        <Link href="/#" style={{textDecoration: 'none', color: 'inherit'}}>
-                            Add To Cart
-                        </Link>
+                    <Button
+                        variant="solid"
+                        className={`bg-[#59999C] hover:bg-[#5FC8CD] my-5 ${isInCart ? 'opacity-75' : ''}`}
+                        size="lg"
+                        onClick={async () => {
+                            if (isInCart) {
+                                await removeProductFromCart(data.id);
+                                setIsInCart(false);
+                            } else {
+                                await addProductToCart(data.id, quantity, format);
+                                setIsInCart(true);
+                            }
+                        }}
+                        disabled={false}
+                    >
+                        {isInCart ? 'Remove From Cart' : 'Add To Cart'}
+
                     </Button>
 
                 </div>
@@ -171,8 +196,8 @@ function PlusIcon(props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGEl
             strokeLinecap="round"
             strokeLinejoin="round"
         >
-            <path d="M5 12h14" />
-            <path d="M12 5v14" />
+            <path d="M5 12h14"/>
+            <path d="M12 5v14"/>
         </svg>
     )
 }

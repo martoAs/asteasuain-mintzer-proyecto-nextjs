@@ -47,3 +47,9 @@ export async function removeFromCart(productId: number){
     await set(key, newCart);
     revalidatePath("/cart");
 }
+
+export async function existsProduct(productId: number): Promise<boolean> {
+    let cart = await getCart();
+    return cart.some((item) => item.id === productId);
+}
+
