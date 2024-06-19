@@ -7,10 +7,12 @@ import {Checkbox} from "@/components/ui/checkbox"
 import {SetStateAction, useEffect, useState} from "react"
 
 import Link from "next/link";
-import {AlbumWithFormats} from "@/app/data/data";
+import {AlbumWithFormats, MyFormData, MyFormDataEdit} from "@/app/data/data";
+import {updateAlbum} from "@/components/component/admin/editProduct";
+import {editProductInDataBase} from "@/app/lib/actions";
 
 export function EditProduct({data}: { data: AlbumWithFormats }) {
-
+    const initialState = {message: null, errors: {}};
     const [title, setTitle] = useState(data.title);
     const [price, setPrice] = useState(data.price);
     const [status, setStatus] = useState(data.new || "");
@@ -35,16 +37,28 @@ export function EditProduct({data}: { data: AlbumWithFormats }) {
     const handleEditProduct = async (event: { preventDefault: () => void }) => {
         event.preventDefault();
         try {
-            // await addProduct(title, price, status, artist, formats);
-            setTitle("");
-            setPrice(0);
-            setStatus("");
-            setArtist("");
-            setFormats([]);
+            const formData: MyFormDataEdit = {
+                id: data.id,
+                title: title,
+                price: price,
+                new: status,
+                artist: artist,
+                formats: formats
+            };
+
+            const result = await editProductInDataBase(initialState, formData);
+            if(result && result.errors){
+                alert("An error has occurred, please check all the fields")
+            }
+            else{
+                alert("Product edited successfully")
+            }
+
         } catch (error) {
             console.error('Error editing product:', error);
         }
     };
+
 
     const handleStatusChange = (value: SetStateAction<string>) => {
         setStatus(value);

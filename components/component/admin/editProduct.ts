@@ -3,15 +3,22 @@ import { prisma } from '../../../lib/prisma';
 import { UpdateAlbumInput } from '../../../app/lib/definitions';
 
 
-async function updateAlbum(id: number, data: UpdateAlbumInput) {
+export async function updateAlbum(id: number, title: string, price: number, status: string, artist: string, formats: string[]) {
     try {
-       /* const album = await prisma.album.update({   
+
+        await prisma.album.update({
             where: { id },
-
-        });*/
-
+            data: {
+                title,
+                price,
+                new: status,
+                artist,
+                formats: {
+                    set: formats.map((format) => ({ format })),
+                },
+            },
+        });
     } catch (error) {
-      // Handle Prisma errors
         console.error("Error updating album:", error);
     }
   }

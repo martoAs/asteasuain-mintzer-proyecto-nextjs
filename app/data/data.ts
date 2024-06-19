@@ -30,3 +30,7 @@ export interface MyFormData {
     artist: string;
     formats: string[];
 }
+
+export interface MyFormDataEdit extends MyFormData {
+    id: number;
+}
