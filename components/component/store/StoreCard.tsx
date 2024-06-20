@@ -15,10 +15,10 @@ import {getFoto} from "@/components/component/store/GetFoto";
 
 
 export function StoreCard({item}: { item: AlbumComplete }) {
-    const NULL_STATUS = "-";
+    const NULL_STATUS = "";
 
     const renderNewChip = (newStatus: string | null): React.ReactNode => {
-        if (newStatus != NULL_STATUS) {
+        if (newStatus != NULL_STATUS && newStatus != null) {
             return (
                 <Chip
                     component="span"
