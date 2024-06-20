@@ -14,13 +14,17 @@ export default function renderSummaryWithoutLink(data : AlbumComplete, summary: 
         const summaryWithoutLink = data.summary.replace(linkRegex, '..');
         return (
             <>
-                <Typography className="text-justify" >
+                <Typography className="text-justify text-black" >
                     {summaryWithoutLink}
                 </Typography>
                 <Link className="text-blue-600" href={linkUrl}>{anchorText}</Link>
             </>
         );
     } else {
-        return data.summary;
+        return (
+            <Typography className="text-black" >
+                {data.summary}
+            </Typography>
+        )
     }
 }

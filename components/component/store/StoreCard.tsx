@@ -11,10 +11,12 @@ import ArrowOutwardIcon from '@mui/icons-material/ArrowOutward';
 import MarqueeOnOverflow from "@/components/component/store/MarqueeOnOverflow";
 import Image from 'next/image';
 import {AlbumComplete} from "@/app/data/data";
+import {getFoto} from "@/components/component/store/GetFoto";
 
 
 export function StoreCard({item}: { item: AlbumComplete }) {
     const NULL_STATUS = "-";
+
     const renderNewChip = (newStatus: string | null): React.ReactNode => {
         if (newStatus != NULL_STATUS) {
             return (
@@ -31,12 +33,13 @@ export function StoreCard({item}: { item: AlbumComplete }) {
     };
 
 
+
     return (
         <Card sx={{ width: 320, maxWidth: '100%', border: 'none'}} className="bg-[#EEEEEE]">
             <CardOverflow>
                 <AspectRatio sx={{ minWidth: 100 }}>
                     <Image
-                        src={item.imageUrl}
+                        src={getFoto(item)}
                         width={100}
                         height={100}
                         loading="lazy"

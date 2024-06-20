@@ -18,6 +18,7 @@ import tags from "@/components/component/store/Tags";
 import Image from "next/image";
 import {AlbumComplete} from "@/app/data/data";
 import {addProductToCart, isProductInCart, removeProductFromCart} from "./manageProductInCart";
+import {getFoto} from "@/components/component/store/GetFoto";
 
 export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
     const [quantity, setQuantity] = React.useState(1);
@@ -53,7 +54,7 @@ export default function AlbumPageComponent({data}: { data: AlbumComplete }) {
                 <div className="flex w-full sm:w-1/2 justify-center items-center">
 
                     <Image
-                        src={data.imageUrl}
+                        src={getFoto(data)}
                         alt="My image"
                         className="w-96"
                         layout="responsive"

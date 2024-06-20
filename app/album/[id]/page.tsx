@@ -10,7 +10,7 @@ export default async function AlbumPage({params: {id}}: { params: { id: string }
         fetchProductsFilteredForId(Number(id))
     ]);
 
-    console.log(artists.length)
+
 
     if (artists.length == 0) {
         return NotFoundPage();

@@ -10,7 +10,7 @@ export async function getArtistData(artists: AlbumWithFormats[]) {
         const url = `${DATA_SOURCE_URL}?method=${method}&artist=${artist}&album=${title}&api_key=${apiKey}&format=json`;
         return fetch(url)
             .then(response => response.json())
-            .then(result => ({ ...result, id, price, formats, isNew})); // Append the id to the result
+            .then(result => ({ ...result, id, price, formats, isNew, artist, title})); // Append the id to the result
     });
 
     const results = await Promise.all(fetchPromises);
@@ -24,10 +24,10 @@ export async function getArtistData(artists: AlbumWithFormats[]) {
 
         return {
             id: item.id, // Use the id from the original artists array
-            title: album.name || '',
+            title: item.title || '',
             price : item.price,
             new : item.isNew,
-            artist: album.artist || '',
+            artist: item.artist || '',
             formats: item.formats,
             summary: wiki.summary || 'No summary available', // Provide a default value if summary is not available
             imageUrl: album.image ? album.image.find((img: { size: string; }) => img.size === 'mega')?.['#text'] || '' : '',
