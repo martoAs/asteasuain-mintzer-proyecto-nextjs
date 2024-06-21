@@ -1,14 +1,47 @@
-import {JSX, SVGProps} from "react"
+"use client";
+import {JSX, SVGProps, useEffect} from "react"
 import {Button} from "@/components/ui/button"
-import {Separator} from "@/components/ui/separator"
-import {getCart, removeFromCart, obtainFromBD, getTotalFromCart} from "@/components/component/cart/sessionData";
-import {Item} from "@/app/data/data";
+import {getCart, getTotalFromCart, obtainFromBD} from "@/components/component/cart/sessionData";
+import {initMercadoPago, Wallet} from '@mercadopago/sdk-react';
+import {createPreference} from "@/components/component/cart/createPreference";
+import {removeProductFromCart} from "@/components/component/store/manageProductInCart";
+import {useState} from "react";
+import {ItemBD} from "@/app/data/data";
 
-export default async function CartPage() {
-    const cart = await getCart();
-    const cartItems = await obtainFromBD(cart);
-    const getTotal = await getTotalFromCart()
 
+
+export default function CartPage() {
+    const [cartItems, setCartItems] = useState<ItemBD[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const cart = await getCart();
+            const items = await obtainFromBD(cart);
+            setCartItems(items);
+        };
+
+        fetchData().then(r => r);
+    }, []);
+
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+        const fetchTotal = async () => {
+            const totalFromCart = await getTotalFromCart();
+            setTotal(totalFromCart);
+        };
+
+        fetchTotal().then(r => r);
+    }, []);
+
+    const[preferenceID, setPreferenceID] = useState(null);
+    const handlePreference = async () => {
+        const preference = await createPreference();
+        if(preference) setPreferenceID(preference);
+
+    }
+
+    initMercadoPago(process.env.MP_PUBLIC_KEY as string);
     return (
         <div
             className="w-full h-full bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden relative p-4 md:p-8">
@@ -29,11 +62,10 @@ export default async function CartPage() {
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <span
-                                        className="text-sm sm:text-base font-semibold">Precio: ${(item.quantity*item.price).toFixed(2)}</span>
+                                        className="text-sm sm:text-base font-semibold">Precio: ${(item.quantity * item.price).toFixed(2)}</span>
                                     <form>
                                         <Button variant="ghost" size="icon" className="p-1" formAction={async () => {
-                                            "use server";
-                                            await removeFromCart(item.id)
+                                            await removeProductFromCart(item.id)
                                         }}>
                                             <XIcon className="h-4 w-4"/>
                                         </Button>
@@ -45,15 +77,19 @@ export default async function CartPage() {
                     <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 grid gap-4">
                         <div className="flex justify-between items-center">
                             <span className="text-lg font-semibold text-black">Total</span>
-                            <span className="text-lg font-semibold text-black">${getTotal.toFixed(2)}</span>
+                            <span className="text-lg font-semibold text-black">${total.toFixed(2)}</span>
                         </div>
-                        <Button className="w-full">Proceed to Checkout</Button>
+                        <Button className="w-full" onClick={handlePreference}>Proceed to Checkout</Button>
+                        {preferenceID && <Wallet initialization={{preferenceId: preferenceID}} customization={{texts: {valueProp: 'smart_option'}}}/>}
                     </div>
                 </div>
             </div>
         </div>
     )
 }
+
+
+
 
 
 function XIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
