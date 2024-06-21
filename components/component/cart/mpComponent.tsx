@@ -8,7 +8,7 @@ import {Button} from "@/components/ui/button";
 
 
 export default function MpComponent({total} : {total: number}) {
-    const[preferenceID, setPreferenceID] = useState(null);
+    const[preferenceID, setPreferenceID] = useState("");
     const handlePreference = async () => {
         const preference = await createPreference();
         if(preference) setPreferenceID(preference);
@@ -29,7 +29,7 @@ export default function MpComponent({total} : {total: number}) {
                 <span className="text-lg font-semibold text-black">${total.toFixed(2)}</span>
             </div>
             <Button className="w-full" onClick={handlePreference}>Proceed to Checkout</Button>
-            {preferenceID && <Wallet initialization={{preferenceId: preferenceID}}
+            {preferenceID!="" && <Wallet initialization={{preferenceId: preferenceID}}
                                      customization={{texts: {valueProp: 'smart_option'}}}/>}
         </div>
     );
