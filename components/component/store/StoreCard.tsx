@@ -75,14 +75,7 @@ export function StoreCard({item}: { item: AlbumComplete }) {
                     ${item.price}
                 </Typography>
             </CardContent>
-            <CardOverflow>
-                <Button variant="solid" className="bg-[#59999C] hover:bg-[#5FC8CD]" size="lg">
-                    <Link href="/#" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        Add To Cart
-                    </Link>
-                </Button>
 
-            </CardOverflow>
         </Card>
     );
 }
