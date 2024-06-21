@@ -3,6 +3,7 @@ import {get, set} from "@/components/component/cart/sessionStore";
 import {Item, ItemBD} from "@/app/data/data";
 import {revalidatePath} from "next/cache";
 import {fetchProductsFilteredForId} from "@/components/component/admin/fetchFilterId";
+import {redirect} from "next/navigation";
 
 const key = "cart";
 export async function getCart():Promise<Item[]>{

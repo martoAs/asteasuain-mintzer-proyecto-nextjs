@@ -20,7 +20,7 @@ export default function CartPage() {
             setCartItems(items);
         };
 
-        fetchData().then(r => r);
+        fetchData();
     }, []);
 
     const [total, setTotal] = useState(0);
@@ -31,7 +31,7 @@ export default function CartPage() {
             setTotal(totalFromCart);
         };
 
-        fetchTotal().then(r => r);
+        fetchTotal();
     }, []);
 
     const[preferenceID, setPreferenceID] = useState(null);
@@ -40,8 +40,14 @@ export default function CartPage() {
         if(preference) setPreferenceID(preference);
 
     }
+    const mpPublicKey = process.env.MP_PUBLIC_KEY;
 
-    initMercadoPago(process.env.MP_PUBLIC_KEY as string);
+    if(mpPublicKey) {
+
+        initMercadoPago(mpPublicKey,{
+            locale: 'es-AR',
+        });
+    }
     return (
         <div
             className="w-full h-full bg-[#191D23] text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden relative p-4 md:p-8">
