@@ -1,4 +1,4 @@
-"use client";
+//"use client";
 
 import {useState} from "react";
 import {createPreference} from "@/components/component/cart/createPreference";
@@ -8,10 +8,10 @@ import {Button} from "@/components/ui/button";
 
 
 export default function MpComponent({total} : {total: number}) {
-    const[preferenceID, setPreferenceID] = useState("");
+   // const[preferenceID, setPreferenceID] = useState("");
     const handlePreference = async () => {
-        const preference = await createPreference();
-        if(preference) setPreferenceID(preference);
+        "use server";
+        await createPreference();
 
     }
     const mpPublicKey = process.env.NEXT_PUBLIC_MP;
@@ -28,9 +28,15 @@ export default function MpComponent({total} : {total: number}) {
                 <span className="text-lg font-semibold text-black">Total</span>
                 <span className="text-lg font-semibold text-black">${total.toFixed(2)}</span>
             </div>
-            <Button className="w-full" onClick={handlePreference}>Proceed to Checkout</Button>
-            {preferenceID!="" && <Wallet initialization={{preferenceId: preferenceID}}
-                                         customization={{texts: {valueProp: 'smart_option'}}}/>}
+            <form>
+                <Button className="w-full" formAction={handlePreference}>Proceed to Checkout</Button>
+
+            </form>
+
         </div>
     );
 }
+
+/*
+*  {preferenceID!="" && <Wallet initialization={{preferenceId: preferenceID}}
+                                         customization={{texts: {valueProp: 'smart_option'}}}/>}*/

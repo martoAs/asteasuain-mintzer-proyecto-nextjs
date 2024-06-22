@@ -7,8 +7,9 @@ const mp = new MercadoPagoConfig({
     });
 
 export async function POST(req: NextRequest){
-    const body = await req.json();
-    //const payment = await new Payment(mp).get({id: body.data.id});
-    console.log("payment", body);
+    console.log("req", req);
+    const body = await req.json().then(data => data as {data: {id: string}});
+    const payment = await new Payment(mp).get({id: body.data.id});
+    console.log("payment", payment);
     return Response.json({success: true});
 }
