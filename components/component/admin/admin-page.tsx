@@ -1,13 +1,15 @@
 import Link from "next/link"
 import {Button} from "@/components/ui/button"
 import {DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenu} from "@/components/ui/dropdown-menu"
-import {TableHead, TableRow, TableHeader, TableCell, TableBody, Table} from "@/components/ui/table"
-import {JSX, SVGProps} from "react"
+import {TableHead, TableRow, TableHeader, TableBody, Table} from "@/components/ui/table"
 import {signOut} from '@/auth';
 import Image from 'next/image';
-import {deleteAlbum} from './deleteProduct';
 import PaginationControls from "@/components/component/PaginationControls";
 import {AlbumWithFormats} from "@/app/data/data";
+import createTableCell from "@/components/component/admin/createTableCell";
+import AdminMenu from "@/components/component/admin/adminMenu";
+
+import {Package2Icon} from '@/components/component/admin/icons';
 
 type PrincipalProps = {
     data: AlbumWithFormats[];
@@ -20,32 +22,7 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
         <div className="flex flex-col justify-center">
             <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr]">
                 <div className="hidden border-r bg-gray-100/40 lg:block dark:bg-gray-800/40">
-                    <div className="flex h-full max-h-screen flex-col gap-2">
-                        <div className="flex h-[60px] items-center border-b px-6">
-                            <Link className="flex items-center gap-2 font-semibold" href="#">
-                                <Package2Icon className="h-6 w-6"/>
-                                <span className="">Wall Of Sound Store</span>
-                            </Link>
-                        </div>
-                        <div className="flex-1 overflow-auto py-2">
-                            <nav className="grid items-start px-4 text-sm font-medium">
-                                <Link
-                                    className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2 text-gray-900  transition-all hover:text-gray-900 dark:bg-gray-800 dark:text-gray-50 dark:hover:text-gray-50"
-                                    href="#"
-                                >
-                                    <PackageIcon className="h-4 w-4"/>
-                                    Productos
-                                </Link>
-                                <Link
-                                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-gray-500 transition-all hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-50"
-                                    href="/admin/add"
-                                >
-                                    <PlusIcon className="h-4 w-4"/>
-                                    Agregar productos
-                                </Link>
-                            </nav>
-                        </div>
-                    </div>
+                    <AdminMenu/>
                 </div>
                 <div className="flex flex-col overflow-hidden">
                     <header
@@ -99,6 +76,11 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
                                     Agregar producto
                                 </Button>
                             </Link>
+                            <Link className="p-5" href="/admin/last">
+                                <Button className="ml-auto" size="sm">
+                                    Ordenes
+                                </Button>
+                            </Link>
 
                         </div>
                         <div className="border shadow-sm rounded-lg">
@@ -128,144 +110,12 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
 }
 
 
-function createTableCell(data: AlbumWithFormats) {
-    const formattedFormats = data.formats.map((format: { format: any; }) => format.format).join(', ');
-
-    return (
-        <TableRow key={data.id}>
-            <TableCell className="font-medium">{data.title}</TableCell>
-            <TableCell>{data.artist}</TableCell>
-            <TableCell>${data.price.toFixed(2)}</TableCell>
-            <TableCell>{formattedFormats}</TableCell>
-            <TableCell>
-                <div className="flex items-center gap-2">
-                    <Link href={`admin/edit/${data.id}`}>
-                        <Button size="icon" variant="outline">
-                            <span className="sr-only">Edit</span>
-                            <DeleteIcon className="h-4 w-4" />
-                        </Button>
-                    </Link>
-                    <form>
-                        <Button type="submit" size="icon" variant="outline"
-                                formAction={deleteAlbum.bind(null, data.id)}>
-                            <Trash2Icon className="h-4 w-4"/>
-                            <span className="sr-only">Delete</span>
-                        </Button>
-                    </form>
-                </div>
-            </TableCell>
-        </TableRow>
-    );
-
-}
 
 
-function Package2Icon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9Z"/>
-            <path d="m3 9 2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/>
-            <path d="M12 3v6"/>
-        </svg>
-    )
-}
 
 
-function PackageIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="m7.5 4.27 9 5.15"/>
-            <path
-                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/>
-            <path d="m3.3 7 8.7 5 8.7-5"/>
-            <path d="M12 22V12"/>
-        </svg>
-    )
-}
 
 
-function PlusIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M5 12h14"/>
-            <path d="M12 5v14"/>
-        </svg>
-    )
-}
 
-function DeleteIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M20 5H9l-7 7 7 7h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Z"/>
-            <line x1="18" x2="12" y1="9" y2="15"/>
-            <line x1="12" x2="18" y1="9" y2="15"/>
-        </svg>
-    )
-}
 
-function Trash2Icon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        >
-            <path d="M3 6h18"/>
-            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
-            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
-            <line x1="10" x2="10" y1="11" y2="17"/>
-            <line x1="14" x2="14" y1="11" y2="17"/>
-        </svg>
-    )
-}
+
