@@ -10,7 +10,7 @@ export async function addProduct(title: string, price: number, status: string, a
           data: {
             title,
             price,
-            new: status,
+            new: status === "-" ? "" : status,
             artist,
             formats: {
               connect: formats.map((format) => ({format: format })),

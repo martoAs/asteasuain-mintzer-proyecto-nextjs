@@ -1,6 +1,5 @@
 'use server';
 import { prisma } from '../../../lib/prisma';
-import { UpdateAlbumInput } from '../../../app/lib/definitions';
 import {revalidatePath} from "next/cache";
 
 
@@ -12,7 +11,7 @@ export async function updateAlbum(id: number, title: string, price: number, stat
             data: {
                 title,
                 price,
-                new: status,
+                new: status === "-" ? "" : status,
                 artist,
                 formats: {
                     set: formats.map((format) => ({ format })),

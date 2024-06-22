@@ -11,13 +11,13 @@ const mp = new MercadoPagoConfig({
 export async function POST(req: NextRequest){
     const body = await req.json().then((data) => data as {data: {id: string}});
     const payment = await new Payment(mp).get({id: body.data.id});
-    const sessionID = payment.external_reference || "undefined";
+    const sessionID = payment.external_reference;
     const order = {
         id: payment.id,
         message: payment.description,
         amount: payment.transaction_amount,
     };
-    if(order.id && order.message && order.amount){
+    if(order.id && order.message && order.amount && sessionID){
         await addOrder(order.id, order.message, order.amount);
         await removeAllCart(sessionID);
     }
