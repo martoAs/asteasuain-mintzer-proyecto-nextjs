@@ -10,8 +10,7 @@ const mp = new MercadoPagoConfig({
 
 export async function POST(req: NextRequest){
     const body = await req.json().then((data) => data as {data: {id: string}});
-    const bodydos = await req.json();
-    console.log("BODY PLANO", bodydos);
+    console.log("REQ", req);
     const payment = await new Payment(mp).get({id: body.data.id});
     const order = {
         id: payment.id,

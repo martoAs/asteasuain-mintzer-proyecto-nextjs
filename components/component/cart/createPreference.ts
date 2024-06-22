@@ -30,7 +30,7 @@ export async function createPreference () {
                     back_urls: {
                         success: "https://wallofsound.vercel.app/",
                         failure: "https://wallofsound.vercel.app/",
-                        pending: "https://wallofsound.vercel.app/"
+                        pending: "https://wallofsound.vercel.app/",
                     },
                     auto_return: "approved",
                     metadata: {
