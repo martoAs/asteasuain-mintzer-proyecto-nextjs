@@ -44,7 +44,7 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
                                         alt="Avatar"
                                         className="rounded-full"
                                         height="32"
-                                        src="/placeholder.svg"
+                                        src="/cat.png"
                                         style={{
                                             aspectRatio: "32/32",
                                             objectFit: "cover",
@@ -57,7 +57,7 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
                             <DropdownMenuContent align="end">
                                 <DropdownMenuItem>
                                     <form
-                                        action={async (e) => {
+                                        action={async () => {
                                             'use server';
                                             await signOut()
                                         }}
