@@ -38,7 +38,7 @@ model Format {
 }
 
 model FinalizedOrder {
-  id      Int    @id
+  id      BigInt @id
   amount  Float
   message String
 }
