@@ -28,14 +28,14 @@ export async function createPreference () {
                         items : items,
                     },
                     back_urls: {
-                        success: 'https://wallofsound.vercel.app/',
-                        failure: 'https://wallofsound.vercel.app/',
-                        pending: 'https://wallofsound.vercel.app/'
+                        success : 'https://wallofsound.vercel.app/',
+                        failure : 'https://wallofsound.vercel.app/',
+                        pending : 'https://wallofsound.vercel.app/'
                     },
                     auto_return: 'approved',
                     metadata: {
                         sessionId : session,
-                    }
+                    },
                 };
 
                 const preference = new Preference(mp);
