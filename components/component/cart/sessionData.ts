@@ -1,9 +1,8 @@
 'use server';
-import {get, set} from "@/components/component/cart/sessionStore";
+import {get, set, setCartFromSession} from "@/components/component/cart/sessionStore";
 import {Item, ItemBD} from "@/app/data/data";
 import {revalidatePath} from "next/cache";
 import {fetchProductsFilteredForId} from "@/components/component/admin/fetchFilterId";
-import {redirect} from "next/navigation";
 
 const key = "cart";
 export async function getCart():Promise<Item[]>{
@@ -49,13 +48,8 @@ export async function removeFromCart(productId: number){
     revalidatePath("/cart");
 }
 
-export async function removeAllCart(){
-    let cart = await getCart();
-    console.log("CART VIEJO", cart);
-    let newCart = cart.filter((item)=>item.id === 0);
-    await set(key, newCart);
-    console.log("GUTENTAG");
-    console.log("NEW", newCart);
+export async function removeAllCart(sessionID: string){
+    await setCartFromSession(sessionID, key, []);
     revalidatePath("/cart");
 }
 

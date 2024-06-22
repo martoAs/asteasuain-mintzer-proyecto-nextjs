@@ -10,10 +10,8 @@ const mp = new MercadoPagoConfig({
 
 export async function POST(req: NextRequest){
     const body = await req.json().then((data) => data as {data: {id: string}});
-    console.log("REQ", req);
     const payment = await new Payment(mp).get({id: body.data.id});
-    const ola = payment.external_reference || "undefined";
-    console.log("OLA", ola);
+    const sessionID = payment.external_reference || "undefined";
     const order = {
         id: payment.id,
         message: payment.description,
@@ -21,7 +19,7 @@ export async function POST(req: NextRequest){
     };
     if(order.id && order.message && order.amount){
         await addOrder(order.id, order.message, order.amount);
-        await removeAllCart();
+        await removeAllCart(sessionID);
     }
 
 

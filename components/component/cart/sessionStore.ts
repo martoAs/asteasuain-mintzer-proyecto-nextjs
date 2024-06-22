@@ -1,6 +1,6 @@
 import "server-only";
-import { cookies } from "next/headers";
-import { kv } from "@vercel/kv";
+import {cookies} from "next/headers";
+import {kv} from "@vercel/kv";
 import {Item} from "@/app/data/data";
 
 
@@ -35,6 +35,13 @@ export async function get(key: string, namespace: string = ""): Promise<Item[] |
         return null;
     }
     return await kv.hget(`session-${namespace}-${sessionId}`, key);
+}
+
+export async function getCartFromSession(sessionID: string, key: string,namespace: string = ""): Promise<Item[] | null> {
+    return await kv.hget(`session-${namespace}-${sessionID}`, key);
+}
+export async function setCartFromSession(sessionID: string, key: string, value: Item[],namespace: string = "") {
+    return await kv.hset(`session-${namespace}-${sessionID}`, { [key]: value });
 }
 
 export function getAll(namespace: string = "") {
