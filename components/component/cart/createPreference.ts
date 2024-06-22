@@ -22,17 +22,17 @@ export async function createPreference () {
                     accessToken: token,
                 });
                 const session = getSessionId();
-
+                console.log("MY SESSION", session);
                 const body = {
                     body:{
                         items : items,
                     },
                     back_urls: {
-                        success: "https://wallofsound.vercel.app/",
-                        failure: "https://wallofsound.vercel.app/",
-                        pending: "https://wallofsound.vercel.app/",
+                        success: 'https://wallofsound.vercel.app/',
+                        failure: 'https://wallofsound.vercel.app/',
+                        pending: 'https://wallofsound.vercel.app/'
                     },
-                    auto_return: "approved",
+                    auto_return: 'approved',
                     metadata: {
                         sessionId : session,
                     }
