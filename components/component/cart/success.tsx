@@ -3,7 +3,7 @@ import { JSX, SVGProps } from "react"
 
 export function Success() {
   return (
-      <div className="flex flex-col items-center justify-center min-h-[100dvh] bg-background px-4 md:px-6 bg-[#191D23]">
+      <div className="flex flex-col items-center justify-center min-h-[100dvh] px-4 md:px-6 bg-[#191D23]">
         <div className="max-w-md text-center space-y-4">
           <CircleCheckIcon className="mx-auto text-green-500 size-16"/>
           <h1 className="text-3xl font-bold text-white">Congratulations!</h1>

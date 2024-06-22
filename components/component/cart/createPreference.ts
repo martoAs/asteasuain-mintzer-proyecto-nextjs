@@ -25,8 +25,8 @@ export async function createPreference () {
                     body:{
                         items : items,
                         back_urls: {
-                            success : 'https://wallofsound.vercel.app/success',
-                            failure : 'https://wallofsound.vercel.app/failure',
+                            success : 'https://wallofsound.vercel.app/checkout/success',
+                            failure : 'https://wallofsound.vercel.app/checkout/failure',
                             pending : 'https://www.youtube.com/watch?v=Vy8moBcKVIM'
                         },
                         auto_return: 'approved',
