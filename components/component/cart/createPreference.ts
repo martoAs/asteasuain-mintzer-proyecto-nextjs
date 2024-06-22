@@ -16,7 +16,7 @@ export async function createPreference () {
         }));
 
             const token = process.env.MP_ACCESS_TOKEN;
-            if(token) {
+            if(token && items.length > 0) {
                 const mp = new MercadoPagoConfig({
                     accessToken: token,
                 });
