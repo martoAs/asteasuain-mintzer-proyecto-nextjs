@@ -8,7 +8,6 @@ import { SetStateAction, useState } from "react";
 import Link from "next/link";
 import {addProductToDataBase} from "@/app/lib/actions";
 import {MyFormData} from "@/app/data/data";
-import {State} from "@/app/lib/actions";
 
 export function AddProduct() {
   const initialState = {message: null, errors: {}};
