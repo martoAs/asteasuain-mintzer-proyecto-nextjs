@@ -4,6 +4,7 @@ import {getCart, obtainFromBD} from "@/components/component/cart/sessionData";
 import {Items} from "mercadopago/dist/clients/commonTypes";
 import {MercadoPagoConfig, Preference} from "mercadopago";
 import {redirect} from "next/navigation";
+import {getSessionId} from "@/components/component/cart/sessionStore";
 
 export async function createPreference () {
         const cartItems = await obtainFromBD(await getCart());
@@ -20,6 +21,7 @@ export async function createPreference () {
                 const mp = new MercadoPagoConfig({
                     accessToken: token,
                 });
+                const session = getSessionId();
 
                 const body = {
                     body:{
@@ -30,6 +32,10 @@ export async function createPreference () {
                         failure: "https://wallofsound.vercel.app/",
                         pending: "https://wallofsound.vercel.app/"
                     },
+                    auto_return: "approved",
+                    metadata: {
+                        sessionId : session,
+                    }
                 };
 
                 const preference = new Preference(mp);
