@@ -14,7 +14,6 @@ export async function createPreference () {
             quantity: item.quantity,
             unit_price: item.price,
         }));
-        console.log(items);
 
             const token = process.env.MP_ACCESS_TOKEN;
             if(token) {
@@ -22,13 +21,12 @@ export async function createPreference () {
                     accessToken: token,
                 });
                 const session = getSessionId();
-                console.log("MY SESSION", session);
                 const body = {
                     body:{
                         items : items,
                         back_urls: {
-                            success : 'https://www.youtube.com/watch?v=s0E5Slqdo1M',
-                            failure : 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                            success : 'https://wallofsound.vercel.app/success',
+                            failure : 'https://wallofsound.vercel.app/failure',
                             pending : 'https://www.youtube.com/watch?v=Vy8moBcKVIM'
                         },
                         auto_return: 'approved',
