@@ -34,7 +34,7 @@ export async function createPreference () {
 
                 const preference = new Preference(mp);
                 const result = await preference.create(body);
-                redirect(result.sandbox_init_point!)
+                redirect(result.init_point!);
             }
 
 }
