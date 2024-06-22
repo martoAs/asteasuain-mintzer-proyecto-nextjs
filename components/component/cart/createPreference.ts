@@ -30,7 +30,6 @@ export async function createPreference () {
                         failure: "https://wallofsound.vercel.app/",
                         pending: "https://wallofsound.vercel.app/"
                     },
-                    auto_return: "approved",
                 };
 
                 const preference = new Preference(mp);

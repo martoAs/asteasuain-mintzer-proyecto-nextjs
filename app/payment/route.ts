@@ -10,7 +10,7 @@ export async function POST(req: NextRequest){
     console.log("req", req);
     const body = await req.json();
     console.log("BODY",body);
-    const payment = await new Payment(mp).get(body.data.id);
+    const payment = await new Payment(mp).get(body.id);
     console.log("payment", payment);
     return Response.json({success: true});
 }
