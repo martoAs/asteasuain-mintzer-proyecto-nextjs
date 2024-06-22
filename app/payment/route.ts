@@ -12,7 +12,7 @@ export async function POST(req: NextRequest){
     const body = await req.json().then((data) => data as {data: {id: string}});
     console.log("REQ", req);
     const payment = await new Payment(mp).get({id: body.data.id});
-    const ola = payment.metadata;
+    const ola = payment.external_reference || "undefined";
     console.log("OLA", ola);
     const order = {
         id: payment.id,

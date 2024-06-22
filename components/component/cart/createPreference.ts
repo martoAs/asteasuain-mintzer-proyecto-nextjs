@@ -26,17 +26,17 @@ export async function createPreference () {
                 const body = {
                     body:{
                         items : items,
+                        back_urls: {
+                            success : 'https://www.youtube.com/watch?v=s0E5Slqdo1M',
+                            failure : 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+                            pending : 'https://www.youtube.com/watch?v=Vy8moBcKVIM'
+                        },
+                        auto_return: 'approved',
+                        external_reference: session,
                     },
-                    back_urls: {
-                        success : 'https://wallofsound.vercel.app/',
-                        failure : 'https://wallofsound.vercel.app/',
-                        pending : 'https://wallofsound.vercel.app/'
-                    },
-                    auto_return: 'approved',
-                    metadata: {
-                        sessionId : session,
-                    },
+
                 };
+
 
                 const preference = new Preference(mp);
                 const result = await preference.create(body);
