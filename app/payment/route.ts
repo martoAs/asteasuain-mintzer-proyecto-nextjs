@@ -1,6 +1,7 @@
 import {NextRequest} from "next/server";
 import {MercadoPagoConfig, Payment} from "mercadopago";
 import {addOrder} from "@/components/component/admin/addOrder";
+import {removeAllCart} from "@/components/component/cart/sessionData";
 
 
 const mp = new MercadoPagoConfig({
@@ -17,8 +18,9 @@ export async function POST(req: NextRequest){
     };
     if(order.id && order.message && order.amount){
         await addOrder(order.id, order.message, order.amount)
+        await removeAllCart();
     }
-   
+
 
     return Response.json({success: true});
 }
