@@ -10,6 +10,7 @@ export async function POST(req: NextRequest){
     const body = await req.json().then((data) => data as {data: {id: string}});
     const payment = await new Payment(mp).get({id: body.data.id});
     console.log("AL MENOS ENTRE");
+    console.log("SIGNATURE", req.headers.get("x-signature-id"));
     console.log("PAYMENT", payment);
     return Response.json({success: true});
 }
