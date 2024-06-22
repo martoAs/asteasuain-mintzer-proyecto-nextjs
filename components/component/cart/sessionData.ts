@@ -51,6 +51,7 @@ export async function removeFromCart(productId: number){
 
 export async function removeAllCart(){
     await set(key, []);
+    console.log("GUTENTAG");
     revalidatePath("/cart");
 }
 

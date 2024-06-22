@@ -17,7 +17,7 @@ export async function POST(req: NextRequest){
         amount: payment.transaction_amount,
     };
     if(order.id && order.message && order.amount){
-        await addOrder(order.id, order.message, order.amount)
+        await addOrder(order.id, order.message, order.amount);
         await removeAllCart();
     }
 
