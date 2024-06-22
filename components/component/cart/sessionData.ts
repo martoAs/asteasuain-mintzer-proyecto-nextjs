@@ -51,6 +51,7 @@ export async function removeFromCart(productId: number){
 
 export async function removeAllCart(){
     let cart = await getCart();
+    console.log("CART VIEJO", cart);
     let newCart = cart.filter((item)=>item.id === 0);
     await set(key, newCart);
     console.log("GUTENTAG");
