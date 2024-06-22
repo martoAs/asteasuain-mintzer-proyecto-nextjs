@@ -30,7 +30,7 @@ export default function MpComponent({total} : {total: number}) {
             </div>
             <Button className="w-full" onClick={handlePreference}>Proceed to Checkout</Button>
             {preferenceID!="" && <Wallet initialization={{preferenceId: preferenceID}}
-                                     customization={{texts: {valueProp: 'smart_option'}}}/>}
+                                         customization={{texts: {valueProp: 'smart_option'}}}/>}
         </div>
     );
 }

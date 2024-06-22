@@ -1,9 +1,9 @@
 "use server";
-import axios from "axios";
 
 import {getCart, obtainFromBD} from "@/components/component/cart/sessionData";
 import {Items} from "mercadopago/dist/clients/commonTypes";
 import {MercadoPagoConfig, Preference} from "mercadopago";
+import {redirect} from "next/navigation";
 
 export async function createPreference () {
     try{
@@ -25,17 +25,11 @@ export async function createPreference () {
                 const body = {
                     body:{
                         items : items,
-                        back_urls: {
-                            success : 'https://www.youtube.com/watch?v=s0E5Slqdo1M',
-                            failure : 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-                            pending : 'https://www.youtube.com/watch?v=Vy8moBcKVIM'
-                        },
-                        auto_return: 'approved',
                     },
 
                 };
 
-                const preference = new Preference(mp)
+                const preference = new Preference(mp);
                 const result = await preference.create(body);
                 return result.id;
             }
