@@ -36,3 +36,9 @@ model Format {
   albums Album[]
   format String  @unique
 }
+
+model FinalizedOrder {
+  id      Int    @id
+  amount  Float
+  message String
+}
