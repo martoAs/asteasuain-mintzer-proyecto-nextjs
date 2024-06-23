@@ -28,7 +28,7 @@ function PaginationControls({ cantPages }: { cantPages: number }) {
                 Prev Page
             </Button>
 
-            <div className="mx-4 text-inherit">
+            <div className="mx-4 text-[#76ABAE]">
                 {page}
             </div>
 
