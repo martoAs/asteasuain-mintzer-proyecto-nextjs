@@ -1,6 +1,3 @@
-//"use client";
-
-import {useState} from "react";
 import {createPreference} from "@/components/component/cart/createPreference";
 import {initMercadoPago, Wallet} from "@mercadopago/sdk-react";
 import {Button} from "@/components/ui/button";
@@ -8,7 +5,7 @@ import {Button} from "@/components/ui/button";
 
 
 export default function MpComponent({total} : {total: number}) {
-   // const[preferenceID, setPreferenceID] = useState("");
+
     const handlePreference = async () => {
         "use server";
         await createPreference();
@@ -36,7 +33,3 @@ export default function MpComponent({total} : {total: number}) {
         </div>
     );
 }
-
-/*
-*  {preferenceID!="" && <Wallet initialization={{preferenceId: preferenceID}}
-                                         customization={{texts: {valueProp: 'smart_option'}}}/>}*/
