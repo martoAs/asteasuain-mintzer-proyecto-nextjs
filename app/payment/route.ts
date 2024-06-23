@@ -25,3 +25,8 @@ export async function POST(req: NextRequest){
 
     return Response.json({success: true});
 }
+
+
+export async function GET(req: NextRequest){
+    throw new Error('Failed to Delete Invoice');
+}

@@ -1,10 +1,11 @@
 import {Order} from "@/app/data/data";
-import {Table, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
+import {Table, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import Link from "next/link";
 import {Button} from "@/components/ui/button";
 import {TableBody} from "@/components/ui/table";
 import AdminMenu from "@/components/component/admin/adminMenu";
 import PaginationControls from "@/components/component/PaginationControls";
+import {createOrderCell} from "@/components/component/admin/createOrderCell";
 
 
 type PrincipalProps = {
@@ -50,14 +51,3 @@ export default function LastOrderComponent({data, count}: PrincipalProps) {
     );
 }
 
-function createOrderCell(data: Order) {
-
-    return (
-        <TableRow key={data.id}>
-            <TableCell className="font-medium">{Number(data.id)}</TableCell>
-            <TableCell>${data.amount.toFixed(2)}</TableCell>
-            <TableCell>{data.message}</TableCell>
-        </TableRow>
-    );
-
-}
