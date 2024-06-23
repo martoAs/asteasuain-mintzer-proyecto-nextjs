@@ -2,6 +2,7 @@ import {NextRequest} from "next/server";
 import {MercadoPagoConfig, Payment} from "mercadopago";
 import {addOrder} from "@/components/component/admin/addOrder";
 import {removeAllCart} from "@/components/component/cart/sessionData";
+import {redirect} from "next/navigation";
 
 
 const mp = new MercadoPagoConfig({
@@ -9,6 +10,7 @@ const mp = new MercadoPagoConfig({
     });
 
 export async function POST(req: NextRequest){
+
     const body = await req.json().then((data) => data as {data: {id: string}});
     const payment = await new Payment(mp).get({id: body.data.id});
     const sessionID = payment.external_reference;
@@ -27,6 +29,6 @@ export async function POST(req: NextRequest){
 }
 
 
-export async function GET(req: NextRequest){
-    throw new Error('Failed to Delete Invoice');
+export async function GET(){
+    return redirect("/");
 }
