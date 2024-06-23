@@ -16,9 +16,6 @@ export default async function Page({
     let artists = await getArtists(page, query);
     let results = await getArtistData(artists);
 
-    if (results.length == 0) {
-        notFound()
-    }
 
     let count = await countProducts()
 
