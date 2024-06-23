@@ -29,7 +29,7 @@ export async function authenticate(
 const ProductSchema = z.object({
     title: z.string().min(1, {message: "Please enter a title"}),
     price: z.coerce.number().gt(0, {message: "Please enter an amount grater than $0"}),
-    new: z.enum(['-', 'special offer', 'new'], {invalid_type_error: "Please select a valid new"}),
+    new: z.enum(['-', 'special offer', 'new', ''], {invalid_type_error: "Please select a valid new"}),
     artist: z.string().min(1, {message: "Please enter an artist"}),
     formats: z.array((z.enum(['vinyl', 'cd', 'cassette']))).min(1,{message: "Please select a valid formats"}),
     });

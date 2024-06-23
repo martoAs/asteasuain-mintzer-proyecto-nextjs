@@ -40,7 +40,7 @@ export function AddProduct() {
       }
       setTitle("");
       setPrice(0);
-      setStatus("");
+      setStatus("-");
       setArtist("");
       setFormats([]);
       setErrors("");
