@@ -5,7 +5,7 @@ export async function fetchProductsFiltered(query: string) {
 
     try{
         const lowercaseQuery = query.toLowerCase();
-        console.log(lowercaseQuery)
+
         return await prisma.album.findMany({
             where: {
                 OR: [
