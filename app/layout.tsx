@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Wall Of Sound Store",
-  description: "Descubrí tu próxima obsesión musical",
+  description: "Discover your next musical obsession",
 };
 
 export default function RootLayout({
