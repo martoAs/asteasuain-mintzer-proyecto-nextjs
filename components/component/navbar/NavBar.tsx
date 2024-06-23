@@ -18,8 +18,8 @@ import Link from 'next/link';
 
 const NAVLINKS = [
     {title: 'Home', path: '/', icon: <HomeIcon/>},
-    {title: 'Tienda', path: '/store', icon: <StoreIcon/>},
-    {title: 'Carrito', path: '/cart', icon: <ShoppingCartIcon/>},
+    {title: 'Store', path: '/store', icon: <StoreIcon/>},
+    {title: 'Cart', path: '/cart', icon: <ShoppingCartIcon/>},
 ];
 
 const COLOR = '#76ABAE'

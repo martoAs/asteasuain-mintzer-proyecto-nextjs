@@ -22,10 +22,10 @@ export default function LastOrderComponent({data, count}: PrincipalProps) {
                 </div>
                 <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
                     <div className="flex items-center">
-                    <h1 className="font-semibold text-lg md:text-2xl">Ultimas Ordenes</h1>
+                    <h1 className="font-semibold text-lg md:text-2xl">Last orders</h1>
                         <Link className="p-5" href="/admin">
                             <Button className="ml-auto" size="sm">
-                                Volver a productos
+                                Return to products
                             </Button>
                         </Link>
 
@@ -33,7 +33,7 @@ export default function LastOrderComponent({data, count}: PrincipalProps) {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>ID de orden</TableHead>
+                                <TableHead>Order ID</TableHead>
                                 <TableHead>Amount</TableHead>
                                 <TableHead>Description</TableHead>
                             </TableRow>

@@ -25,16 +25,15 @@ export default function Principal() {
                                 color="white"
                                 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-gray-100"
                             >
-                                Wall of Sound: Tu Destino para la Música en Formato Clásico
+                                Wall of Sound: Your Destination for Classical Music
                             </Typography>
                             <Typography
                                 variant="lead"
                                 color="white"
                                 className="py-2 mb-12 opacity-80"
                             >
-                                Explora nuestra tienda en línea para encontrar una amplia selección de vinilos, CDs,
-                                álbumes y cassettes. Desde clásicos atemporales hasta las últimas novedades, tenemos
-                                algo para todos los amantes de la música.
+                                Explore our online store to find a wide selection of vinyl records, CDs,
+                                albums, and cassettes. From timeless classics to the latest releases, we have something for every music lover.
                             </Typography>
                         </div>
                     </div>
@@ -55,21 +54,21 @@ export default function Principal() {
                                 color="white"
                                 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none text-gray-100"
                             >
-                                Compra tus albumes favoritos
+                                Purchase your favorite albums.
                             </Typography>
                             <Typography
                                 variant="lead"
                                 color="white"
                                 className="py-2 mb-12 opacity-80"
                             >
-                                Ordena discos desde la comodidad de tu casa, a solo un click!
+                                Order records from the comfort of your home, just one click away!
                             </Typography>
                             <div className="flex gap-2">
                                 <Link
                                     className="inline-flex h-10 items-center justify-center rounded-md bg-[#76ABAE] px-8 text-sm font-medium text-gray-900 shadow transition-colors hover:bg-[#97D7DB] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-300 disabled:pointer-events-none disabled:opacity-50 dark:bg-[#3b2314] dark:text-gray-100 dark:hover:bg-[#2d1c10]"
                                     href="/store"
                                 >
-                                    Comprá ahora!
+                                    Buy now!
                                 </Link>
                             </div>
                         </div>

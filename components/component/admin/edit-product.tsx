@@ -68,44 +68,44 @@ export function EditProduct({data}: { data: AlbumWithFormats }) {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen overflow-hidden px-4 py-8 m-4 relative">
             <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 absolute">
-                <h1 className="text-2xl font-bold mb-6">Añadir producto nuevo</h1>
+                <h1 className="text-2xl font-bold mb-6">Edit product</h1>
                 <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleEditProduct}>
                     <div className="space-y-2">
-                        <Label htmlFor="title">Título del album</Label>
+                        <Label htmlFor="title">Album title</Label>
                         <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)}
-                               placeholder="Ingrese el titulo del producto"/>
+                               placeholder="Enter album title"/>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="price">Precio</Label>
+                        <Label htmlFor="price">Price</Label>
                         <Input id="price" value={price} onChange={(e) => setPrice(Number(e.target.value))} min={1}
-                               placeholder="Ingrese el precio del producto" required type="number" step="0.01"/>
+                               placeholder="Enter product price" required type="number" step="0.01"/>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="status">Novedad del producto</Label>
+                        <Label htmlFor="status">Product newness</Label>
                         <Select defaultValue="" onValueChange={handleStatusChange}>
                             <SelectTrigger className="w-full">
-                                <SelectValue placeholder="Elija novedad"/>
+                                <SelectValue placeholder="Choose newness"/>
                             </SelectTrigger>
                             <SelectContent>
                                 <SelectItem value="-">-</SelectItem>
-                                <SelectItem value="oferta">Oferta</SelectItem>
-                                <SelectItem value="nuevo">Nuevo</SelectItem>
+                                <SelectItem value="special offer">Special offer</SelectItem>
+                                <SelectItem value="new">New</SelectItem>
                             </SelectContent>
                         </Select>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="artist">Nombre del artista</Label>
+                        <Label htmlFor="artist">Artist name</Label>
                         <Input id="artist" value={artist} onChange={(e) => setArtist(e.target.value)}
-                               placeholder="Ingrese el nombre del artista"/>
+                               placeholder="Enter artist name"/>
                     </div>
                     <div className="space-y-2">
-                        <Label htmlFor="status">Formato del producto</Label>
+                        <Label htmlFor="status">Product format</Label>
                         <div>
                             <div className="flex items-center space-x-2">
-                                <Checkbox id="status-vinilo" value="vinilo"
-                                          onClick={() => handleCheckboxChange('vinilo')}
-                                          checked={formats.includes('vinilo')}/>
-                                <Label htmlFor="status-vinilo">Vinilo</Label>
+                                <Checkbox id="status-vinilo" value="vinyl"
+                                          onClick={() => handleCheckboxChange('vinyl')}
+                                          checked={formats.includes('vinyl')}/>
+                                <Label htmlFor="status-vinilo">Vinyl</Label>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <Checkbox id="status-cd" value="cd" onClick={() => handleCheckboxChange('cd')}
@@ -121,16 +121,16 @@ export function EditProduct({data}: { data: AlbumWithFormats }) {
                         </div>
                     </div>
                     {formats.length > 0 ? (
-                        <Button type="submit" size="lg">Editar producto</Button>
+                        <Button type="submit" size="lg">Edit product</Button>
                     ) : (
                         <Button type="submit" size="lg" disabled>
-                            Editar producto (Faltan datos)
+                            Edit product (Missing fields)
                         </Button>
                     )}
                 </form>
                 <Link href="/admin">
                     <div className="mt-6 flex justify-end">
-                        <Button size="lg">Volver</Button>
+                        <Button size="lg">Return</Button>
                     </div>
                 </Link>
             </div>

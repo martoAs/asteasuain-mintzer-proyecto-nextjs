@@ -70,15 +70,15 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
                     </header>
                     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-6">
                         <div className="flex items-center">
-                            <h1 className="font-semibold text-lg md:text-2xl">Productos</h1>
+                            <h1 className="font-semibold text-lg md:text-2xl">Products</h1>
                             <Link className="p-5" href="/admin/add">
                                 <Button className="ml-auto" size="sm">
-                                    Agregar producto
+                                    Add product
                                 </Button>
                             </Link>
                             <Link className="p-5" href="/admin/last">
                                 <Button className="ml-auto" size="sm">
-                                    Ordenes
+                                    Orders
                                 </Button>
                             </Link>
 
@@ -87,10 +87,10 @@ export default async function AdminPage({ data, count }: PrincipalProps) {
                             <Table>
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead>Titulo album</TableHead>
-                                        <TableHead>Artista</TableHead>
-                                        <TableHead>Precio</TableHead>
-                                        <TableHead>Formatos</TableHead>
+                                        <TableHead>Album title</TableHead>
+                                        <TableHead>Artist</TableHead>
+                                        <TableHead>Price</TableHead>
+                                        <TableHead>Formats</TableHead>
                                         <TableHead>Actions</TableHead>
                                     </TableRow>
                                 </TableHeader>

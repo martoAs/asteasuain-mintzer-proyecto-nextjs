@@ -15,10 +15,10 @@ export async function addOrder(id: number, message: string, amount: number) {
             });
             revalidatePath("/admin")
 
-            console.log(`Album created with ID: ${order.id}`);
+            console.log(`Order created with ID: ${order.id}`);
         });
 
     } catch (error) {
-        console.error("Error adding product:", error);
+        console.error("Error adding order:", error);
     }
 }

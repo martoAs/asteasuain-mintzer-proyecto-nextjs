@@ -57,39 +57,39 @@ export function AddProduct() {
   return (
       <div className="flex flex-col items-center justify-center min-h-screen overflow-hidden relative container mx-auto max-w-4xl px-4 py-8">
       <div className="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6">
-        <h1 className="text-2xl font-bold mb-6">Añadir producto nuevo</h1>
+        <h1 className="text-2xl font-bold mb-6">Add new product</h1>
         <form className="grid grid-cols-1 md:grid-cols-2 gap-6" onSubmit={handleSaveProduct}>
           <div className="space-y-2">
-            <Label htmlFor="title">Título del album</Label>
-            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Ingrese el titulo del producto"/>
+            <Label htmlFor="title">Album title</Label>
+            <Input id="title" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Enter the product title"/>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="price">Precio</Label>
-            <Input id="price" value={price} onChange={(e)=> setPrice(Number(e.target.value))} min={1} placeholder="Ingrese el precio del producto" type="number" step="0.01" />
+            <Label htmlFor="price">Price</Label>
+            <Input id="price" value={price} onChange={(e)=> setPrice(Number(e.target.value))} min={1} placeholder="Enter the product price" type="number" step="0.01" />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="status">Novedad del producto</Label>
+            <Label htmlFor="status">Product newness</Label>
             <Select defaultValue="-" onValueChange={handleStatusChange}>
                 <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Elija novedad" />
+                  <SelectValue placeholder="Choose newness" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="-">-</SelectItem>
-                  <SelectItem value="oferta">Oferta</SelectItem>
-                  <SelectItem value="nuevo">Nuevo</SelectItem>
+                  <SelectItem value="special offer">Special offer</SelectItem>
+                  <SelectItem value="new">New</SelectItem>
                 </SelectContent>
             </Select>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="artist">Nombre del artista</Label>
-            <Input id="artist" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Ingrese el nombre del artista"/>
+            <Label htmlFor="artist">Artist name</Label>
+            <Input id="artist" value={artist} onChange={(e) => setArtist(e.target.value)} placeholder="Enter the artist name"/>
           </div>
           <div className="space-y-2">
-            <Label htmlFor="status">Formato del producto</Label>
+            <Label htmlFor="status">Product format</Label>
             <div>
               <div className="flex items-center space-x-2">
-                <Checkbox id="status-vinilo" value="vinilo" onClick={() => handleCheckboxChange('vinilo')} checked={formats.includes('vinilo')}/>
-                <Label htmlFor="status-vinilo">Vinilo</Label>
+                <Checkbox id="status-vinilo" value="vinilo" onClick={() => handleCheckboxChange('vinyl')} checked={formats.includes('vinyl')}/>
+                <Label htmlFor="status-vinilo">Vinyl</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <Checkbox id="status-cd" value="cd" onClick={() => handleCheckboxChange('cd')} checked={formats.includes('cd')} />
@@ -102,10 +102,10 @@ export function AddProduct() {
             </div>
           </div>
           {formats.length > 0 ? (
-              <Button type="submit" size="lg">Guardar producto</Button>
+              <Button type="submit" size="lg">Save product</Button>
           ) : (
               <Button type="submit" size="lg" disabled>
-                Guardar producto (Sin productos)
+                Save product (Missing fields)
               </Button>
           )}
 
@@ -120,7 +120,7 @@ export function AddProduct() {
         )}
         <Link href="/admin">
           <div className="mt-6 flex justify-end">
-            <Button size="lg">Volver</Button>
+            <Button size="lg">Return</Button>
           </div>
         </Link>
 
