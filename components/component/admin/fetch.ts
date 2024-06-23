@@ -26,3 +26,14 @@ export async function countProducts() {
         return 0;
     }
 }
+
+
+export async function countOrders() {
+    try {
+        const count = await prisma.finalizedOrder.count();
+        return count;
+    } catch (error) {
+        console.error("Error contando productos:", error);
+        return 0;
+    }
+}
