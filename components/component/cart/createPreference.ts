@@ -27,7 +27,7 @@ export async function createPreference () {
                         back_urls: {
                             success : 'https://wallofsound.vercel.app/checkout/success',
                             failure : 'https://wallofsound.vercel.app/checkout/failure',
-                            pending : 'https://www.youtube.com/watch?v=Vy8moBcKVIM'
+                            pending : 'https://wallofsound.vercel.app/'
                         },
                         auto_return: 'approved',
                         external_reference: session,
