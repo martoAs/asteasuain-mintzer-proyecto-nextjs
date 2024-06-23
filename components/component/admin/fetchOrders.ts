@@ -8,7 +8,10 @@ export async function fetchOrders(pages: number) {
     try {
         return await prisma.finalizedOrder.findMany({
             skip: (pages - 1) * NUMBER_OF_ORDERS,
-            take: NUMBER_OF_ORDERS
+            take: NUMBER_OF_ORDERS,
+            orderBy: {
+                id: 'desc',
+            }
         });
     } catch (error) {
         console.error("Error fetching products:", error);
