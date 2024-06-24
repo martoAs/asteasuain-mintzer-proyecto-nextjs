@@ -20,15 +20,17 @@ export default function MpComponent({total} : {total: number}) {
         });
     }
     return (
-        <div className="flex flex-col justify-center items-center bg-gray-100 dark:bg-gray-800 rounded-lg p-6 grid gap-4">
-            <div className="flex justify-between items-center">
+        <div className="container h-[150px] bg-gray-100 dark:bg-gray-800 rounded-lg p-10">
+            <div className="flex justify-between items-center p-1">
                 <span className="text-lg font-semibold text-black">Total</span>
                 <span className="text-lg font-semibold text-black">${total.toFixed(2)}</span>
             </div>
-            <form>
-                <Button className="w-full" formAction={handlePreference}>Proceed to Checkout</Button>
+            <div className="p-5">
+                <form>
+                    <Button className="my-auto w-full" formAction={handlePreference}>Proceed to Checkout</Button>
+                </form>
+            </div>
 
-            </form>
 
         </div>
     );
