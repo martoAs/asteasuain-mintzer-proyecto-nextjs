@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["relationJoins"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  password String
+  name     String?
+}
+
+model Album {
+  id      Int      @id @default(autoincrement())
+  title   String
+  price   Float
+  new     String?
+  artist  String
+  formats Format[]
+}
+
+model Format {
+  key    Int     @id @default(autoincrement())
+  albums Album[]
+  format String  @unique
+}
+
+model FinalizedOrder {
+  id      BigInt @id
+  amount  Float
+  message String
+}
